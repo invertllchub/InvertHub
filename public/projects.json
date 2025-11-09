@@ -1,0 +1,30 @@
+[
+    {
+        "id": "0",
+        "title": "WOW WORLD",
+        "description": "CURATING VISIONARY ART, DESIGN & AI STORIES FOR CREATIVE MINDS.",
+        "pathImg": "https://res.cloudinary.com/dyfregti9/image/upload/v1758484323/Projects_wow_world_fq2f9t.png", 
+        "link": "https://woworld.net/"
+    },
+    {
+        "id": "1",
+        "title": "AKARATI",
+        "description": "A DIGITAL PLATFORM CONNECTING USERS WITH REAL-ESTATE SERVICES.",
+        "pathImg": "https://res.cloudinary.com/dyfregti9/image/upload/v1758483261/Projects_Akarati_f9y42y.png", 
+        "link": "https://akarati.com/"
+    },
+    {
+        "id": "2",
+        "title": "REVITESSE",
+        "description": "SPEEDS UP REVIT TASKES AND MODEL MANAGEMENT.",
+        "pathImg": "https://res.cloudinary.com/dyfregti9/image/upload/v1760112479/Revitesse_Revit_Plugin_02_w5rlu1.png", 
+        "link": "https://revitesse.com/"
+    },
+    {
+        "id": "3",
+        "title": "ARCHYARDS",
+        "description": "ARCHYARD — WHERE DESIGN MEETS INNOVATION IN EVERY SPACE.",
+        "pathImg": "https://res.cloudinary.com/dyfregti9/image/upload/v1758483352/Projects_Archyards_v1zry8.png", 
+        "link": "https://archyard-eg.com/"
+    }
+]
