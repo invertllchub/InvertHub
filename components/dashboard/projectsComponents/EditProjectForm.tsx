@@ -1,117 +1,134 @@
-import React, { useState } from "react";
+import { useState } from "react";
 // React-hook-form and validation with Zod
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { EditProjectSchema } from "@/schemas/EditProjectSchema";
-import { EditProjectFormFields } from "@/schemas/EditProjectSchema";
+import { EditProjectSchema } from "@/schemas/projects/EditProjectSchema";
+import { EditProjectFormFields } from "@/schemas/projects/EditProjectSchema";
 // Toast
-import { showToast } from "@/components/jobs/Toast";
-// Cloudinary function
-import { uploadToCloudinary } from "@/utils/CloudinaryUpload";
+import { showToast } from "@/components/toast/Toast";
+// types
 import { Project } from "@/types/project";
-import { supabase } from "@/lib/supabaseClient";
+import useEditProject from "@/hooks/projects/useEditProject";
+import PublishBtn from "../Buttons/PublishBtn";
 // props
 type ProjectProp = {
   project: Project;
 };
 
 function EditProjectForm({ project }: ProjectProp) {
-  const [preview, setPreview] = useState<string>(project.pathImg || "");
-  const [file, setFile] = useState<File | null>(null);
+  const { mutate } = useEditProject();
+  const [preview, setPreview] = useState<string>(project.imageUrl || "");
+  const projectId = project.id;
 
   const handleFileChange = (newFile: File) => {
-    setFile(newFile);
     setPreview(URL.createObjectURL(newFile));
+    setValue("ImageUrl", newFile);
   };
 
   const {
     register,
     handleSubmit,
     reset,
-    formState: { errors },
+    setValue, 
+    formState: { errors, isSubmitting },
   } = useForm<EditProjectFormFields>({
     resolver: zodResolver(EditProjectSchema),
     defaultValues: {
-      projectName: project.title,
-      projectDescription: project.description,
-      projectLink: project.link,
+      Name: project.name,
+      Description: project.description,
+      Link: project.link,
     },
   });
 
-const onSubmit: SubmitHandler<EditProjectFormFields> = async (data) => {
-  const toastId = showToast("loading", {
-    message: "Updating project...",
-  });
+  const onSubmit: SubmitHandler<EditProjectFormFields> = async (data) => {
+    const toastId = showToast("loading", { message: "Submitting Project..." });
 
-  try {
-    let uploadedImageUrl = preview;
+    const formData = new FormData();
+    formData.append("id", projectId.toString());
+    formData.append("Name", data.Name);
+    formData.append("Image", data.ImageUrl || project.imageUrl);
+    formData.append("Link", data.Link);
+    formData.append("Description", data.Description);
 
-    if (file) {
-      uploadedImageUrl = await uploadToCloudinary(file);
-    }
-
-    const { error } = await supabase
-      .from("projects")
-      .update({
-        title: data.projectName,
-        description: data.projectDescription,
-        link: data.projectLink,
-        pathImg: uploadedImageUrl,
-      })
-      .eq("id", project.id); 
-
-    if (error) throw error;
-
-    showToast("success", {
-      message: "Project updated successfully!",
-      toastId,
+    mutate(formData, {
+      onSuccess: () => {
+        showToast("success", {
+          message: "Project created successfully!",
+          toastId,
+        });
+        reset();
+      },
+      onError: (err: any) => {
+        showToast("error", {
+          message: err.message || "Failed to submit Project",
+          toastId,
+        });
+      },
     });
-  } catch (error) {
-    console.error("⚠️ Supabase update error:", error);
-    showToast("error", {
-      message: "Failed to update project. Please try again later.",
-      toastId,
-    });
-  }
-};
+  };
 
   return (
     <form id="edit-project-form" onSubmit={handleSubmit(onSubmit)}>
-      <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6 p-6 md:p-12">
+      <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6">
+
+        {/* Project Name */}
         <div className="w-full">
-          <label className="block mb-1 font-medium">Project Name</label>
+          <label className="block text-gray-700 font-medium mb-1">
+            Project Name
+          </label>
           <input
             type="text"
-            placeholder="Project Title"
-            {...register("projectName")}
-            className="border p-3 rounded-lg w-full"
+            placeholder="e.g. Akarati"
+            {...register("Name")}
+            className="w-full border border-gray-200 p-3 rounded-lg shadow-md focus:none outline-0"
           />
-          {errors.projectName && (
-            <div className="text-red-500">
-              {errors.projectName.message?.toString()}
-            </div>
+          {errors.Name && (
+            <div className="text-red-600">{errors.Name.message}</div>
           )}
         </div>
 
+        {/* Project Link */}
         <div className="w-full">
-          <label className="block mb-1 font-medium">Description</label>
+          <label className="block text-gray-700 font-medium mb-1">
+            Project Link
+          </label>
+          <input
+            type="text"
+            placeholder="https://www.Example.com"
+            {...register("Link")}
+            className="w-full border border-gray-200 p-3 rounded-lg shadow-md focus:none outline-0"
+          />
+          {errors.Link && (
+            <div className="text-red-600">{errors.Link.message}</div>
+          )}
+        </div>
+
+        {/* Project Description */}
+        <div className="w-full">
+          <label className="block text-gray-700 font-medium mb-1">
+            Description
+          </label>
           <textarea
             placeholder="Project Description"
-            {...register("projectDescription")}
-            className="border p-3 rounded-lg w-full h-28"
+            {...register("Description")}
+            rows={7}
+            className="w-full border border-gray-200 p-3 rounded-lg shadow-md focus:none outline-0"
           />
-          {errors.projectDescription && (
-            <div className="text-red-500">
-              {errors.projectDescription.message?.toString()}
+          {errors.Description && (
+            <div className="text-red-600">
+              {errors.Description.message}
             </div>
           )}
         </div>
 
+        {/* Project Image */}
         <div className="w-full">
-          <label className="block mb-1 font-medium">Project Image</label>
+          <label className="block text-gray-700 font-medium mb-1">
+            Project Image
+          </label>
           <div
             className="relative border-2 border-dashed rounded-md p-4 text-center cursor-pointer 
-        min-h-[200px] flex items-center justify-center"
+            min-h-[200px] flex items-center justify-center"
             onClick={() => document.getElementById("fileInput")?.click()}
             onDragOver={(e) => e.preventDefault()}
             onDrop={(e) => {
@@ -157,27 +174,19 @@ const onSubmit: SubmitHandler<EditProjectFormFields> = async (data) => {
               }}
             />
           </div>
-          {errors.pathImg && (
-            <div className="text-red-500">
-              {errors.pathImg.message?.toString()}
-            </div>
+          {errors.ImageUrl && (
+            <div className="text-red-600">{errors.ImageUrl.message as string}</div>
           )}
         </div>
 
-        <div className="w-full">
-          <label className="block mb-1 font-medium">Project Link</label>
-          <input
-            type="text"
-            placeholder="https://example.com"
-            {...register("projectLink")}
-            className="border p-3 rounded-lg w-full"
-          />
-          {errors.projectLink && (
-            <div className="text-red-500">
-              {errors.projectLink.message?.toString()}
-            </div>
-          )}
-        </div>
+      </div>
+
+      {/* ---------------------- Submit Button ---------------------- */}
+      <div className="flex justify-center md:justify-end mt-15">
+        <PublishBtn
+          text={isSubmitting ? "Saving..." : "Save Changes"}
+          form="edit-project-form"
+        />
       </div>
     </form>
   );

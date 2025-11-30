@@ -3,52 +3,72 @@
 import { useParams } from "next/navigation";
 // Components
 import EditProjectForm from "@/components/dashboard/projectsComponents/EditProjectForm";
+import GoBackBtn from "@/components/dashboard/Buttons/GoBackBtn";
+import DeleteBtn from "@/components/dashboard/Buttons/DeleteBtn";
 // React Query
-import useGetProjects from "@/hooks/useGetProjects";
+import useGetProject from "@/hooks/projects/useGetProject";
+import useDeleteProject from "@/hooks/projects/useDeleteProject";
+// Cokkies
+import Cookies from "js-cookie";
+// Loading & Error State
+import ErrorState from "@/components/states/ErrorState";
+import IsLoadingState from "@/components/states/IsLoadingState";
+
 
 export default function EditProjectPage() {
-  const { data: projects = [], isLoading, error } = useGetProjects();
+  const { mutate } = useDeleteProject();
+  const role = Cookies.get("role");
   const params = useParams();
-  const projectId = Number(params.id); 
-  const project = projects.find((p) => (p.id) === projectId);
+  const projectID = params.id as string;
+  const {data: project, isLoading, isError} = useGetProject(projectID, {
+    enabled: projectID !== "",  
+  });
 
 
-  if (isLoading) {
+  if (isError) {
     return (
-      <div className="w-full min-h-screen flex justify-center items-center">
-        <p className="text-xl font-semibold animate-pulse">Loading projects...</p>
+      <div className="ml-50 flex justify-center items-center h-screen">
+        <ErrorState />
       </div>
     );
   }
 
-  if (error) {
+  if (isLoading) {
     return (
-      <div className="w-full min-h-screen flex justify-center items-center">
-        <p className="text-xl text-red-500 font-semibold">Failed to load projects 😞</p>
+      <div className="ml-50 flex justify-center items-center h-screen">
+        <IsLoadingState />
       </div>
     );
   }
 
   return (
-    <div className='pt-22 md:pt-12 md:ml-50 p-6 md:p-12 min-h-screen bg-[#D6F4ED] overflow-hidden'>
-      <div className="w-full bg-white rounded-lg shadow-md flex md:flex-row items-center justify-between gap-6 p-6">
-        <h1 className="text-2xl md:text-4xl font-extrabold text-[#473472]">Edit Project</h1>
-        <button
-          form="edit-project-form"
-          type="submit"
-          className="px-6 py-3 bg-[#473472] hover:bg-[#53629E] transition-colors text-white rounded-lg col-start-1 cursor-pointer"
-        >
-          Save Changes
-        </button>
+    <div className="pt-22 md:pt-12 md:ml-50 p-6 md:p-20 min-h-screen bg-(--secondary) overflow-hidden">
+      <div
+        className="w-full bg-white flex md:flex-row items-center justify-between gap-6 p-6 
+            rounded-t-lg shadow-md border-b border-gray-500"
+      >
+        <div className="flex items-center justify-center gap-8">
+          <GoBackBtn />
+          <div className="text-gray-500">project list / Update project</div>
+        </div>
       </div>
       <div className="mb-10">
-        {project ? (
-          <div className="my-10 bg-white rounded-lg shadow-md">
-            <EditProjectForm project={project} />
+        {project &&
+          <div>
+            <div className="bg-white mb-10 rounded-lg shadow-md p-6 md:p-12">
+              <EditProjectForm project={project} />
+            </div>
+              {role === "Admin" && 
+                <div className="bg-white mb-10 rounded-lg shadow-md p-6 md:p-12">
+                  <DeleteBtn 
+                  item="Project" 
+                  id={project.id}
+                  deleteFn={mutate}
+                  />
+                </div>
+              }
           </div>
-        ) : (
-          <p className="text-center text-gray-500">Project not found</p>
-        )}
+        }
       </div>
     </div>
   );

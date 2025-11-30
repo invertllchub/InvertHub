@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { SubscribeFormSchema } from "@/schemas/SubscribeFormSchema";
 import { SubscribeFormFields } from "@/schemas/SubscribeFormSchema";
 // Toast
-import { showToast } from "@/components/jobs/Toast";
+import { showToast } from "@/components/toast/Toast";
 
 function SubscribeForm() {
   const {

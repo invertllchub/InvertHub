@@ -1,0 +1,103 @@
+ [
+    {
+      "id": "act_001",
+      "user": "Mohamed Tharwat",
+      "action": "create",
+      "entity": "project",
+      "entityId": "proj_001",
+      "message": "Added a new project: Website Redesign",
+      "meta": { "status": "published" },
+      "createdAt": "2025-11-16T10:30:00.000Z"
+    },
+    {
+      "id": "act_002",
+      "user": "Mohamed Tharwat",
+      "action": "update",
+      "entity": "job",
+      "entityId": "job_002",
+      "message": "Updated job opening: Frontend Developer",
+      "meta": { "changes": ["title", "status"] },
+      "createdAt": "2025-11-15T18:45:00.000Z"
+    },
+    {
+      "id": "act_003",
+      "user": "Kamel Lokman",
+      "action": "auto-publish",
+      "entity": "article",
+      "entityId": "art_002",
+      "message": "Article published automatically: Design Patterns for SaaS",
+      "meta": null,
+      "createdAt": "2025-11-14T09:10:00.000Z"
+    },
+    {
+      "id": "act_004",
+      "user": "Mohamed Tharwat",
+      "action": "delete",
+      "entity": "project",
+      "entityId": "proj_004",
+      "message": "Deleted project Draft #4",
+      "meta": null,
+      "createdAt": "2025-11-13T21:00:00.000Z"
+    },
+    {
+      "id": "act_005",
+      "user": "Kamel Lokman",
+      "action": "analytics",
+      "entity": "visitors",
+      "entityId": null,
+      "message": "Daily visitors report updated",
+      "meta": { "count": 154 },
+      "createdAt": "2025-11-13T06:00:00.000Z"
+    },
+    {
+      "id": "act_006",
+      "user": "Mohamed Tharwat",
+      "action": "create",
+      "entity": "article",
+      "entityId": "art_004",
+      "message": "Added a new article: Tips for UI Animations",
+      "meta": { "category": "UI" },
+      "createdAt": "2025-11-12T15:34:00.000Z"
+    },
+    {
+      "id": "act_007",
+        "user": "Kamel Lokman",
+      "action": "cron",
+      "entity": "backup",
+      "entityId": "backup_2025_11_12",
+      "message": "Daily database backup completed",
+      "meta": null,
+      "createdAt": "2025-11-12T03:00:00.000Z"
+    },
+    {
+      "id": "act_008",
+      "user": "Mohamed Tharwat",
+      "action": "update",
+      "entity": "project",
+      "entityId": "proj_001",
+      "message": "Updated project status to: In Review",
+      "meta": { "previous": "draft", "new": "review" },
+      "createdAt": "2025-11-11T11:20:00.000Z"
+    },
+    {
+      "id": "act_009",
+      "user": "Mohamed Tharwat",
+      "action": "create",
+      "entity": "job",
+      "entityId": "job_003",
+      "message": "Created new job posting: Backend Engineer",
+      "meta": { "category": "Engineering" },
+      "createdAt": "2025-11-10T17:55:00.000Z"
+    },
+    {
+      "id": "act_010",
+      "user": "Kamel Lokman",
+      "action": "auto-clean",
+      "entity": "temp-files",
+      "entityId": null,
+      "message": "Temporary files cleaned",
+      "meta": { "removed": 43 },
+      "createdAt": "2025-11-10T02:30:00.000Z"
+    }
+  ]
+

@@ -5,26 +5,10 @@ import NewsHeader from "@/components/main/NewsPage/NewsHeader";
 import ArticleCard from "@/components/main/NewsPage/ArticleCard";
 import SubscribeForm from "@/components/main/NewsPage/SubscribeForm";
 // React Query
-import useGetArticles from "@/hooks/useGetArticles";
+import useGetArticles from "@/hooks/articles/useGetArticles";
 
 export default function NewsPage() {
-  const { data: articles = [], isLoading, error} = useGetArticles()
-
-  if (isLoading) {
-    return (
-      <div className="w-full min-h-screen flex justify-center items-center">
-        <p className="text-xl font-semibold animate-pulse">Loading Articles...</p>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="w-full min-h-screen flex justify-center items-center">
-        <p className="text-xl text-red-500 font-semibold">Failed to load Articles 😞</p>
-      </div>
-    );
-  }
+  const { data: articles = [] } = useGetArticles();
 
   return (
     <div className="w-full min-h-screen bg-white py-12 mt-20">

@@ -1,19 +1,21 @@
-export type JobStatus = "Available" | "Not Available";
+export type JobStatus = "Available" | "NotAvailable";
+export type EmploymentType = "FullTime" | "PartTime" | "Hybrid" | "Intern";
+export type ExperienceLevel = "Junior" | "MidLevel" | "Midlevel" | "Senior";
 
 export interface Job {
-  id: number;
+  id: string;
   title: string;
   location: string;
-  employmentType: "Full-time" | "Part-time" | "Contract";
-  experienceLevel: "Entry-level" | "Junior" | "Mid-level" | "Senior";
-  salary: string;
+  employmentType: EmploymentType;
+  experienceLevel: ExperienceLevel;
   status: JobStatus;
-  datePosted: string;   
+  createdAt: string;
   closingDate: string;
   description: string;
-  keyResponsibilities: string[],
-  requirements: string[];
-  benefits: string[];
+keyResponsibilities: Record<string, string>;
+requirements: Record<string, string>;
+benefits: Record<string, string>;
+
 }
 
 export interface JobsResponse {

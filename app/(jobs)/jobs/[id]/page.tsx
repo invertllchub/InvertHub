@@ -1,9 +1,8 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import { useParams } from "next/navigation";
 import Image from "next/image";
-// Types
-import { Job } from "@/types/jobs";
+
 // Icons
 import { Hourglass, MapPin, Calendar, Clock } from "lucide-react";
 //components
@@ -11,33 +10,39 @@ import Logo from "@/components/main/Logo";
 import JobApplication from "@/components/jobs/JobApplication";
 import JobDetails from "@/components/jobs/JobDetails";
 // React Query
-import useGetJobs from "@/hooks/useGetJobs";
+import useGetJob from "@/hooks/jobs/useGetJob";
+import ErrorState from "@/components/states/ErrorState";
+import IsLoadingState from "@/components/states/IsLoadingState";
+//
+import { formatDate } from "@/utils/FormatDate";
 
 function Page() {
   const [showForm, setShowForm] = useState(false);
-  const {data : jobs = [], isLoading, error} = useGetJobs();
   const params = useParams();
-  const job = jobs.find((j) => String(j.id) === params.id);
+  const jobID = params.id as string;
+  const {data: job, isLoading, isError} = useGetJob(jobID, {
+    enabled: jobID !== "",  
+  });
 
   const jobBannerDetails = [
-    {icon: <Hourglass size={20} />, label: job?.employmentType},
-    {icon: <MapPin size={20} />, label: job?.location},
-    {icon: <Calendar size={20} />, label: job?.datePosted},
-    {icon: <Clock size={20} />, label: job?.closingDate},
-  ]
+    { icon: <Hourglass size={20} />, label: job?.employmentType },
+    { icon: <MapPin size={20} />, label: job?.location },
+    { icon: <Calendar size={20} />, label: formatDate(job?.createdAt)  },
+    { icon: <Clock size={20} />, label: formatDate(job?.closingDate) },
+  ];
 
-    if (isLoading) {
+  if (isError) {
     return (
-      <div className="w-full min-h-screen flex justify-center items-center">
-        <p className="text-xl font-semibold animate-pulse">Loading Jobs...</p>
+      <div className="ml-50 flex justify-center items-center h-screen">
+        <ErrorState />
       </div>
     );
   }
 
-  if (error) {
+  if (isLoading) {
     return (
-      <div className="w-full min-h-screen flex justify-center items-center">
-        <p className="text-xl text-red-500 font-semibold">Failed to load Jobs 😞</p>
+      <div className="ml-50 flex justify-center items-center h-screen">
+        <IsLoadingState />
       </div>
     );
   }
@@ -47,7 +52,7 @@ function Page() {
       {/* Hero Section */}
       <div className="relative w-full h-screen md:h-[80vh]">
         {/* Logo */}
-        <Logo isDark={true}/>
+        <Logo isDark={true} />
 
         {/* Panner */}
         <Image
@@ -74,7 +79,7 @@ function Page() {
                   </div>
                   <span>{item.label}</span>
                 </div>
-              )
+              );
             })}
           </div>
           <div className="w-7/12 mx-auto mt-10">

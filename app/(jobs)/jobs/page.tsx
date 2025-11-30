@@ -5,32 +5,29 @@ import Link from "next/link";
 // components
 import Logo from "@/components/main/Logo";
 // React Query
-import useGetJobs from "@/hooks/useGetJobs";
+import useGetJobs from "@/hooks/jobs/useGetJobs";
 
 function Page() {
-  const {data : jobs = [], isLoading, error} = useGetJobs();
+  const { data } = useGetJobs(); 
 
-  if (isLoading) {
-    return (
-      <div className="w-full min-h-screen flex justify-center items-center">
-        <p className="text-xl font-semibold animate-pulse">Loading Jobs...</p>
-      </div>
-    );
-  }
+  const jobs = data?.data?.data || [];
 
-  if (error) {
-    return (
-      <div className="w-full min-h-screen flex justify-center items-center">
-        <p className="text-xl text-red-500 font-semibold">Failed to load Jobs 😞</p>
-      </div>
-    );
-  }
+  const formatJobStatus = (status: string) => {
+    switch (status) {
+      case "Available":
+        return "Open";
+      case "NotAvailable":
+        return "Closed";
+      default:
+        return status;
+    }
+  };
 
   return (
     <div>
       {/* Hero Section */}
       <div className="relative w-full h-[90vh] md:h-screen">
-        <Logo isDark={true}/>
+        <Logo isDark={true} />
 
         <Image
           alt="jobs picture"
@@ -71,20 +68,18 @@ function Page() {
                 <div className="flex items-center">{job.title}</div>
                 <div className="flex items-center">{job.location}</div>
                 <div className="flex items-center">{job.employmentType}</div>
-                <div className="flex items-center">{job.status}</div>
+                <div className="flex items-center">{formatJobStatus(job.status)}</div>
                 <div className="flex items-center">
                   <Link
-                    href={
-                      job?.status === "Not Available" ? "#" : `/jobs/${job.id}`
-                    }
+                    href={job?.status === "NotAvailable" ? "#" : `/jobs/${job.id}`}
                     onClick={(e) => {
-                      if (job?.status === "Not Available") {
+                      if (job?.status === "NotAvailable") {
                         e.preventDefault();
                       }
                     }}
                     className={`py-2 px-4 rounded-md shadow-md text-white font-bold text-lg
                     ${
-                      job?.status === "Not Available"
+                      job?.status === "NotAvailable"
                         ? "bg-gray-400 cursor-not-allowed opacity-70"
                         : "bg-black hover:bg-gray-900"
                     }
@@ -116,13 +111,11 @@ function Page() {
                 <strong>Status:</strong> {job.status}
               </p>
               <Link
-                href={job?.status === "Not Available" ? "#" : `/jobs/${job.id}`}
-                onClick={(e) =>
-                  job?.status === "Not Available" && e.preventDefault()
-                }
+                href={job?.status === "NotAvailable" ? "#" : `/jobs/${job.id}`}
+                onClick={(e) => job?.status === "NotAvailable" && e.preventDefault()}
                 className={`mt-2 inline-block py-2 px-4 rounded-md shadow-md text-white font-bold
                   ${
-                    job?.status === "Not Available"
+                    job?.status === "NotAvailable"
                       ? "bg-gray-400 cursor-not-allowed opacity-70"
                       : "bg-black hover:bg-gray-900"
                   }`}

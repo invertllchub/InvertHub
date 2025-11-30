@@ -1,13 +1,12 @@
 [
   {
-    "id": 1,
+    "id": "1",
     "title": "Graphic Designer & Social Media Creator (Intern)",
     "location": "Remote | Department: WOW WORLD Magazine / INVERT LLC",
-    "employmentType": "Full-Time",
-    "experienceLevel": "Mid-level",
-    "salary": "18,000 EGP",
-    "status": "Available",
-    "datePosted": "2025-09-25",
+    "employmentType": "FullTime",
+    "experienceLevel": "MidLevel",
+    "status": "closed",
+    "createdAt": "2025-09-25",
     "closingDate": "2025-10-15",
     "description": "You’ll join our creative team to design visual content and support our digital storytelling. From magazine layouts and web visuals to daily posts and reels, you’ll help bring bold ideas to life.",
     "keyResponsibilities": [
@@ -31,14 +30,13 @@
     ]
   },
   {
-    "id": 2,
+    "id": "2",
     "title": "Sales Intern",
     "location": "Remote | Department: WOW WORLD Magazine / INVERT LLC",
-    "employmentType": "Part-Time",
+    "employmentType": "PartTime",
     "experienceLevel": "Senior",
-    "salary": "15,000 EGP",
-    "status": "Available",
-    "datePosted": "2025-09-26",
+    "status": "open",
+    "createdAt": "2025-09-26",
     "closingDate": "2025-10-20",
     "description": "As a Sales Intern, you’ll help us connect with artists, creators, and partners worldwide. You’ll learn how to pitch creative publishing offers, track leads, and close collaborations that expand our global community.",
     "keyResponsibilities": [
@@ -61,14 +59,13 @@
     ]
   },
   {
-    "id": 3,
+    "id": "3",
     "title": "Sales Executive (Part-Time / Full-Time)",
     "location": "Remote | Department: INVERT LLC / WOW WORLD Magazine",
-    "employmentType": "Full-Time / Part-Time",
+    "employmentType": "Hybrid",
     "experienceLevel": "Junior",
-    "salary": "10,000 EGP",
-    "status": "Available",
-    "datePosted": "2025-09-27",
+    "status": "open",
+    "createdAt": "2025-09-27",
     "closingDate": "2025-10-12",
     "description": "You’ll play a key role in expanding our sales network for creative publishing, coaching, and digital solutions. You’ll handle outreach, partnerships, and deal closing — focusing on growth and relationship building.",
     "keyResponsibilities": [
@@ -91,14 +88,13 @@
     ]
   },
   {
-    "id": 4,
+    "id": "4",
     "title": "Full Stack Developer (Intern)",
     "location": "Remote | Department: INVERT LLC / Akarati ERP",
-    "employmentType": "Full-Time",
-    "experienceLevel": "Mid-level",
-    "salary": "12,000 EGP",
-    "status": "Available",
-    "datePosted": "2025-09-28",
+    "employmentType": "FullTime",
+    "experienceLevel": "MidLevel",
+    "status": "open",
+    "createdAt": "2025-09-28",
     "closingDate": "2025-10-18",
     "description": "Join our tech division to build and optimize digital platforms for architecture, AI, and publishing. You’ll work alongside experienced developers on real-world SaaS and automation projects using .NET for backend and modern JS frameworks for frontend.",
     "keyResponsibilities": [
@@ -122,14 +118,13 @@
     ]
   },
   {
-    "id": 5,
+    "id": "5",
     "title": "Automation & Workflow Developer (Intern)",
     "location": "Remote | Department: INVERT LLC / Tech Division",
-    "employmentType": "Full-Time",
-    "experienceLevel": "Entry-level",
-    "salary": "11,000 EGP",
-    "status": "Available",
-    "datePosted": "2025-09-29",
+    "employmentType": "FullTime",
+    "experienceLevel": "Senior",
+    "status": "open",
+    "createdAt": "2025-09-29",
     "closingDate": "2025-10-25",
     "description": "You’ll help automate processes across our creative ecosystem, connecting marketing, publishing, and ERP workflows. You’ll use AI tools, APIs, and .NET-based integrations to enhance efficiency and scalability.",
     "keyResponsibilities": [

@@ -10,23 +10,35 @@ import Embed from "@editorjs/embed";
 import LinkTool from "@/utils/editorTools/LinkTool";
 import VideoTool from "@/utils/editorTools/VideoTool";
 import OverviewTool from "@/utils/editorTools/OverViewTool";
-// Toast 
-import { showToast } from "@/components/jobs/Toast";
-// supabase
-import { supabase } from "@/lib/supabaseClient"; 
-// React Query
-import useGetArticles from "@/hooks/useGetArticles";
+// Toast
+import { showToast } from "@/components/toast/Toast";
+// Types
+import { Article } from "@/types/articles";
+// Components
+import PublishBtn from "../Buttons/PublishBtn";
+import GoBackBtn from "../Buttons/GoBackBtn";
+// React Query Hook
+import useEditArticle from "@/hooks/articles/useEditArticle";
 
 export default function EditArticlePage() {
+  const { mutate } = useEditArticle();
   const editorRef = useRef<EditorJS | null>(null);
-  const { data: articles = [], isLoading, error} = useGetArticles()
+  const [articles, setArticles] = useState<Article []>([])
   const params = useParams();
-  const articleId = Number(params.id); 
-  const article = articles.find((p) => (p.id) === articleId);
+  const articleId = Number(params.id);
+  const article = articles.find((p) => p.id === articleId);
 
 
-  
-  
+  const fetchData = async () => {
+    const response = await fetch('/articles.json');
+    const result = await response.json();
+    setArticles(result)
+  }
+
+  useEffect(()=>{
+    fetchData()
+  }, [])
+
   useEffect(() => {
     if (!article || editorRef.current) return;
     let editor: EditorJS;
@@ -43,7 +55,7 @@ export default function EditArticlePage() {
           embed: Embed,
           link: LinkTool,
           video: VideoTool,
-          overview: OverviewTool
+          overview: OverviewTool,
         },
       });
       editorRef.current = editor;
@@ -54,7 +66,10 @@ export default function EditArticlePage() {
     }
 
     return () => {
-      if (editorRef.current && typeof editorRef.current.destroy === "function") {
+      if (
+        editorRef.current &&
+        typeof editorRef.current.destroy === "function"
+      ) {
         editorRef.current.destroy();
         editorRef.current = null;
       }
@@ -63,80 +78,69 @@ export default function EditArticlePage() {
 
   const handleSave = async () => {
     const outputData = await editorRef.current?.save();
-    const toastId = showToast("loading", {
-      message: "Updating article..."
-    })
-    
-    const UpdatedArticle = {     
-      ...outputData,
-      author: "Mohamed", 
+    if (!outputData || !outputData.blocks || outputData.blocks.length === 0) {
+      console.error("No blocks found");
+      return;
     };
-    
-    try {
-      const { data, error } = await supabase
-      .from("articles")
-      .update(UpdatedArticle)
-      .eq("id", articleId);
+    const blocks = outputData.blocks;
+    const title = blocks[0].data.text;
+    const overview = blocks[1].data.text;
+    const toastId = showToast("loading", {
+      message: "Publishing Article...",
+    });
 
-      console.log(article)
+    const payload = {
+      title: title,
+      overview: overview,
+      blocks: blocks,
+      author: article?.author,
+      updatedBy: "Mohamed",
+    };
 
+    console.log(payload)
 
-      if (error) {
-        console.error("❌ Supabase error:", error);
-        showToast("error", {
-          message: `Failed to publish: ${error.message}`,
+    mutate(payload, {
+      onSuccess: () => {
+        showToast("success", {
+          message: "Article updated successfully!",
           toastId,
         });
-        return;
-      }
-
-      showToast("success", {
-        message: "Article Published successfully!",
-        toastId,
-      });
-      console.log("✅ Saved article:", data);
-    } catch (error) {
-      console.error("⚠️ Unexpected error", error);
-      showToast("error", {
-        message: "Something went wrong, please try again.",
-        toastId,
-      });
-    }
+      },
+      onError: (err: any) => {
+        showToast("error", {
+          message: err.message || "Failed to update Article",
+          toastId,
+        });
+      },
+    });
   };
 
-  if (isLoading) {
-    return (
-      <div className="w-full min-h-screen flex justify-center items-center">
-        <p className="text-xl font-semibold animate-pulse">Loading Articles...</p>
-      </div>
-    );
-  }
 
-  if (error) {
-    return (
-      <div className="w-full min-h-screen flex justify-center items-center">
-        <p className="text-xl text-red-500 font-semibold">Failed to load Articles 😞</p>
-      </div>
-    );
-  }
 
   return (
-    <div className="w-full bg-gray-200/75 p-6 md:p-12">
-      <div className="w-full flex items-center justify-between">
-        <h1 className="text-xl md:text-4xl font-extrabold text-gray-800">
-          EDIT YOUR ARTICLE
-        </h1>
-        <button
-          onClick={handleSave}
-          className="px-4 w-42 py-2 bg-blue-600 hover:bg-blue-700 transition-colors text-white rounded-lg col-start-1 cursor-pointer"
-        >
-          Save Changes
-        </button>
-      </div>
+        <div className='pt-22 md:pt-12 md:ml-50 p-6 md:p-20 min-h-screen bg-(--secondary) overflow-hidden'>
+            <div className="w-full bg-white flex flex-col md:flex-row items-center justify-between gap-6 p-6 
+            rounded-t-lg shadow-md border-b border-gray-500">
 
-      <div className="rounded-lg shadow-md py-6 min-h-screen px-4 mb-15 mt-10 bg-white w-full">
-        <div id="editorjs" />
-      </div>
-    </div>
+                <div className='flex items-center justify-center gap-8'>
+                    <GoBackBtn />
+                    <div className='text-gray-500'>
+                        articles list  /  Update article
+                    </div>
+                </div>
+                <div className='hidden md:block'>
+                    <PublishBtn text="Edit Article" onClick={handleSave}/>
+                </div>
+
+            </div>
+            <div className="bg-white mb-10 p-2 md:p-8 rounded-b-lg min-h-screen">
+              <div className='border rounded-lg shadow-md min-h-screen p-4'>
+                <div id="editorjs" />
+              </div>
+              <div className='md:hidden w-full flex items-center justify-center mt-10'>
+                <PublishBtn text="Edit Article" />
+              </div>
+            </div>
+        </div>
   );
 }

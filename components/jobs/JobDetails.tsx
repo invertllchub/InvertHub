@@ -8,6 +8,8 @@ type JobProps = {
 };
 
 function JobDetails({ job, setShowForm }: JobProps) {
+
+  console.log(job)
   return (
     <div>
       <div className="w-10/12 mx-auto my-10 bg-white p-6 rounded-lg shadow">
@@ -24,15 +26,15 @@ function JobDetails({ job, setShowForm }: JobProps) {
         <div className="my-5">
           <h2 className="text-2xl font-bold mb-4">Key Responsibilities</h2>
           <ul className="list-disc pl-6 space-y-2 text-gray-700">
-            {job?.keyResponsibilities.map((req, i) => (
-              <li key={i}>{req}</li>
+            {Object.values(job?.keyResponsibilities || {}).map((keyResponsibility, i) => (
+              <li key={i}>{keyResponsibility}</li>
             ))}
           </ul>
         </div>
         <div className="my-5">
           <h2 className="text-2xl font-bold mb-4">Requirements</h2>
           <ul className="list-disc pl-6 space-y-2 text-gray-700">
-            {job?.requirements.map((req, i) => (
+            {Object.values(job?.requirements || {}).map((req, i) => (
               <li key={i}>{req}</li>
             ))}
           </ul>
@@ -40,7 +42,7 @@ function JobDetails({ job, setShowForm }: JobProps) {
         <div className="my-5">
           <h2 className="text-2xl font-bold mb-4">Benefits</h2>
           <ul className="list-disc pl-6 space-y-2 text-gray-700">
-            {job?.benefits.map((benefit, i) => (
+            {Object.values(job?.benefits || {}).map((benefit, i) => (
               <li key={i}>{benefit}</li>
             ))}
           </ul>

@@ -2,8 +2,8 @@ import React from "react";
 // React-hook-form and validation with Zod
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { JobApplicationFormFields } from "../../schemas/JobApplySchema";
-import { JobApplySchema } from "../../schemas/JobApplySchema";
+import { JobApplicationFormFields } from "../../schemas/jobs/JobApplySchema";
+import { JobApplySchema } from "../../schemas/jobs/JobApplySchema";
 // Reach-phone-liberary
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
@@ -12,7 +12,7 @@ import { Job } from "@/types/jobs";
 // Functions
 import { uploadToCloudinary } from "@/utils/CloudinaryUpload";
 // Toast
-import { showToast } from "./Toast";
+import { showToast } from "../toast/Toast";
 
 type JobProps = {
   job: Job;
@@ -38,15 +38,14 @@ function JobApplication({ job }: JobProps) {
       let cvUrl = "";
 
       const web3formsKey = process.env.NEXT_PUBLIC_WEB3FORMS_KEY!;
-      
+
       const file = (data.CV as FileList)[0];
       if (file) {
         cvUrl = await uploadToCloudinary(file);
       }
-      
-      const jobTitle = job.title
+
+      const jobTitle = job.title;
       const formData = new FormData();
-      formData.append("access_key", web3formsKey);
       formData.append("Job Title", jobTitle);
       formData.append("Full Name", data.fullName);
       formData.append("Gender", data.gender);
@@ -55,7 +54,7 @@ function JobApplication({ job }: JobProps) {
       formData.append("CoverLetter", data.coverLetter);
       formData.append("CV_Link", cvUrl);
 
-      const response = await fetch("https://api.web3forms.com/submit", {
+      const response = await fetch("/api/jobApplication", {
         method: "POST",
         body: formData,
       });

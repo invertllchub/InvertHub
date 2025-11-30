@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic';
 const ImageBlock = dynamic(() => import('../ImageBlock'), {
   loading: () => (
     <div className="flex items-center justify-center h-screen text-white">
-      Loading projects...
+      Loading Image...
     </div>
   )
 })

@@ -8,7 +8,7 @@ const Editor = dynamic(() => import("@/components/dashboard/articlesComponents/E
 
 export default function AddArticlePage() {
   return (
-    <div className="pl-0 md:pl-15">
+    <div>
       <Editor />
     </div>
   );

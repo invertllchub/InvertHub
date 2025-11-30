@@ -5,10 +5,10 @@ import Link from "next/link";
 import { Project } from "@/types/project";
 
 const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
-  const header = project.title;
-  const image = project.pathImg;
+  const header = project.name;
+  const image = project.imageUrl;
   const paragraph = project.description;
-  const link = project.link;
+  const link = project.link || "";
 
   return (
     <article className="group bg-white rounded-lg overflow-hidden border border-gray-100 hover:border-gray-300 transition-all duration-300">

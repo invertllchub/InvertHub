@@ -1,8 +1,8 @@
 export type Project = {
-  id: number;
-  title: string;
+  id: string;
+  name: string;
   description: string;
-  pathImg: string;
+  imageUrl: string;
   link: string;
 };
 export type projects = {

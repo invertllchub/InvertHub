@@ -1,163 +1,102 @@
-"use client"
+"use client";
 
-import { useEffect, useMemo, useState } from "react";
+import dynamic from "next/dynamic";
+import { useEffect, useState } from "react";
 // Components
-import DeleteBtn from "@/components/dashboard/DeleteBtn"
-import UpdateBtn from "@/components/dashboard/UpdateBtn";
-import ToolBar from "@/components/dashboard/ToolBar"
-// Types
-import { TeamMember } from "@/types/team";
+const ToolBar = dynamic(() => import("@/components/dashboard/ToolBar"));
+const MobileCard = dynamic(() => import("@/components/dashboard/MobileCard"));
+const Pagination = dynamic(() => import("@/components/dashboard/Pagination"));
+const Table = dynamic(() => import("@/components/dashboard/Table"), { ssr: false }) as typeof import("@/components/dashboard/Table").default;
 // Hooks
-import { useSelection } from "@/hooks/useSelection";
+import { fetchUsers } from "@/hooks/users/useGetUsers";
+import { useQueryClient } from "@tanstack/react-query";
+import useGetUsers from "@/hooks/users/useGetUsers";
+import useDebounce from "@/hooks/useDebounce";
+// Types
+import { User } from "@/types/users";
+// Loading & Error States
+import IsLoadingState from "@/components/states/IsLoadingState";
+import ErrorState from "@/components/states/ErrorState";
 
-function page() {
-  const [ team, setTeam] = useState<TeamMember []>([])
+function Page() {
+  const queryClient = useQueryClient();
+
   const [searchValue, setSearchValue] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
 
-  const {
-    selected,
-    toggleAll,
-    toggleOne,
-    handleDeleteOne,
-    handleDeleteAll,
-    allSelected,
-    someSelected,
-    headerCheckboxRef,
-  } = useSelection(team);
+  const debouncedSearchValue = useDebounce(searchValue, 2000);
+  const { data, isLoading, isError } = useGetUsers(currentPage, 6, debouncedSearchValue);
 
-
-  const fetchData = async () => {
-    const respone = await fetch('/team.json')
-    const result = await respone.json()
-    setTeam(result)
-  }
+  const users = data?.data?.data || [];
+  const totalPages = data?.data?.pagination?.totalPages ?? 1;
 
   useEffect(() => {
-    fetchData()
-  }, [])
+    const nextPage = currentPage + 1;
+    if (nextPage > 2) return;
+    queryClient.prefetchQuery({
+      queryKey: ["users", nextPage, searchValue],
+      queryFn: () => fetchUsers(nextPage, 6, searchValue),
+    })
+  }, [currentPage, queryClient])
 
-  const filteredUsers = useMemo(() => {
-    if(!team.length) return[];
-    if(!searchValue) return team;
-    return team.filter(u => u.name.toLowerCase().includes(searchValue.toLowerCase()));
-  }, [team, searchValue])
+  const columns = [
+    { key: "isActive", label: "", width: "20px" },
+    { key: "fullName", label: "Name" },
+    { key: "email", label: "Email" },
+    { key: "role", label: "Role", width: "100px" },
+    { key: "jobTitle", label: "Job Title", width: "150px" },
+    { key: "lastLoginAt", label: "Last Login Date", width: "200px" },
+  ];
 
-    
+  if (isError) {
     return (
-          <div className='pt-22 md:pt-12 md:ml-50 p-6 md:p-12 min-h-screen bg-[#D6F4ED] overflow-hidden'>
-            <ToolBar
-            title="users"
-            allSelected={allSelected}
-            someSelected={someSelected}
-            setSearchValue={setSearchValue}
-            >
-              <DeleteBtn selectedIds={selected} onDeleted={handleDeleteAll} page={'users'}/>
-            </ToolBar>
+      <div className="ml-50 flex justify-center items-center h-screen">
+        <ErrorState />
+      </div>
+    );
+  }
 
-            {/* 🖥️ TABLE VIEW (Desktop) */}
-            <div className="hidden md:block w-full mt-8 overflow-x-auto">
-              <div className="grid grid-cols-[50px_1fr_150px_150px_150px_150px] gap-8 my-4 font-semibold text-gray-700 pb-2">
-                <div className="flex justify-center">
-                  <input
-                    type="checkbox"
-                    ref={headerCheckboxRef}
-                    checked={allSelected}
-                    onChange={toggleAll}
-                    className="w-4 h-4 cursor-pointer accent-blue-700"
-                  />
-                </div>
-                <div>Name</div>
-                <div>Job Title</div>
-                <div>Role</div>
-                <div>Articles</div>
-                <div className="text-center">Actions</div>
-              </div>
+  if (isLoading) {
+    return (
+      <div className="ml-50 flex justify-center items-center h-screen">
+        <IsLoadingState />
+      </div>
+    );
+  }
 
-              {filteredUsers.map((user, index) => (
-                <div
-                key={user.id}
-                className={`grid grid-cols-[50px_1fr_150px_150px_150px_150px] gap-8 py-4 my-1.5 shadow-sm text-gray-600 hover:bg-gray-50 transition-all duration-150 
-                  ${selected.includes(user.id) ? "bg-blue-50" : "bg-white"}
-                  ${index === 0 ? "rounded-t-lg" : ""}
-                  ${index === filteredUsers.length - 1 ? "rounded-b-lg" : ""}
-                  `}
-                >
-                  <div className="flex justify-center">
-                    <input
-                    type="checkbox"
-                    checked={selected.includes(user.id)}
-                    onChange={() => toggleOne(user.id)}
-                    className="w-4 cursor-pointer accent-blue-700"
-                    />
-                  </div>
-                  <div className="flex items-center font-medium">{user.name}</div>
-                  <div className="flex items-center">{user.jobTitle}</div>
-                  <div className="flex items-center">{user.role}</div>
-                  <div className="flex items-center">{user.articles}</div>
-                  <div className="flex justify-center gap-4">
-                    <DeleteBtn page={'users'} id={user.id} onDeleted={() => handleDeleteOne(user.id)} />
-                    <UpdateBtn page="users" id={user.id} />
-                  </div>
-                </div>
-              ))}
+  return (
+    <div className="pt-22 md:pt-12 md:ml-50 p-6 md:p-12 min-h-screen bg-(--secondary) overflow-hidden">
+      <ToolBar title="users" setSearchValue={setSearchValue} />
 
-              {filteredUsers.length === 0 && (
-                <div className="text-center text-gray-500 py-10">
-                  No user found.
-                </div>
-              )}
+      {/* TABLE VIEW */}
+      <div className="hidden md:block w-full mt-8 overflow-x-auto">
+        <Table<User>
+          page="users"
+          data={users}
+          columns={columns}
+        />
+      </div>
 
-            </div>
+      {/* MOBILE VIEW */}
+      <div className="block md:hidden mt-6 space-y-4 pb-24">
+        <MobileCard
+          page="users"
+          data={users}
+          columns={columns}
+        />
+      </div>
 
-            {/* 📱 CARD VIEW (Mobile) */}
-            <div className="block md:hidden mt-6  space-y-4">
-              {filteredUsers.map((user) => (
-                <div
-                  key={user.id}
-                  className={`relative bg-white p-5 rounded-xl shadow-sm border transition-all duration-200 ${
-                    selected.includes(user.id)
-                      ? "border-blue-500"
-                      : "border-gray-200"
-                  }`}
-                >
-                  {/* Checkbox */}
-                  <input
-                    type="checkbox"
-                    checked={selected.includes(user.id)}
-                    onChange={() => toggleOne(user.id)}
-                    className="absolute top-4 left-4 w-4 h-4 accent-blue-700 cursor-pointer"
-                  />
+      {/* PAGINATION */}
+      <div className="mt-6 flex justify-center">
+        <Pagination
+          pageCount={totalPages}
+          onPageChange={(page) => setCurrentPage(page + 1)}
+          forcePage={currentPage - 1}
+        />
+      </div>
 
-                  {/* Title */}
-                  <h3 className="text-lg font-semibold text-gray-900 pl-6 mb-2">
-                    {user.name}
-                  </h3>
-
-                  <p className="text-sm text-gray-600 pl-6">
-                    <span className="font-medium">Job Title:</span> {user.jobTitle}
-                  </p>
-                  <p className="text-sm text-gray-600 pl-6">
-                    <span className="font-medium">Role:</span> {user.role}
-                  </p>
-                  <p className="text-sm text-gray-600 pl-6 mb-4">
-                    <span className="font-medium">Articles:</span> {user.articles}
-                  </p>
-
-                  {/* Actions */}
-                  <div className="flex justify-end gap-3">
-                    <DeleteBtn page={'users'} id={user.id} onDeleted={() => handleDeleteOne(user.id)} />
-                    <UpdateBtn page="users" id={user.id} />
-                  </div>
-                </div>
-              ))}
-
-              {filteredUsers.length === 0 && (
-                <div className="text-center text-gray-500 py-10">No users found.</div>
-              )}
-            </div>
-
-          </div>
-      )
+    </div>
+  );
 }
 
-export default page
+export default Page;

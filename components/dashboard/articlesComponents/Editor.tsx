@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import "../../../app/(main)/globals.css"
+import "../../../app/(main)/globals.css";
 import { useEffect, useRef } from "react";
 // Editor.js & Editor tools
 import EditorJS from "@editorjs/editorjs";
@@ -12,13 +12,17 @@ import VideoTool from "@/utils/editorTools/VideoTool";
 import LinkTool from "@/utils/editorTools/LinkTool";
 import OverviewTool from "@/utils/editorTools/OverViewTool";
 // Toast
-import { showToast } from "@/components/jobs/Toast";
+import { showToast } from "@/components/toast/Toast";
 // Upload to Cloudinary fn()
 import { uploadToCloudinary } from "@/utils/CloudinaryUpload";
-// supabase
-import { supabase } from "@/lib/supabaseClient"; 
+// Components
+import GoBackBtn from "../Buttons/GoBackBtn";
+import PublishBtn from "../Buttons/PublishBtn";
+// React Query Hook
+import useAddArticle from "@/hooks/articles/useAddArticle";
 
 export default function Editor() {
+  const { mutate } = useAddArticle();
   const editorRef = useRef<EditorJS | null>(null);
 
   useEffect(() => {
@@ -78,59 +82,66 @@ export default function Editor() {
 
   const handleSave = async () => {
     const outputData = await editorRef.current?.save();
-    const toastId = showToast("loading", {
-      message: "Publishing Article..."
-    })
-
-    
-    const article = {     
-      ...outputData,
-      author: "Mohamed", 
+    if (!outputData || !outputData.blocks || outputData.blocks.length === 0) {
+      console.error("No blocks found");
+      return;
     };
-  
-    try {
-      const { data, error } = await supabase.from("articles").insert([article]);
+    const blocks = outputData.blocks;
+    const title = blocks[0].data.text;
+    const overview = blocks[1].data.text;
+    const toastId = showToast("loading", {
+      message: "Publishing Article...",
+    });
 
-      if (error) {
-        console.error("❌ Supabase error:", error);
-        showToast("error", {
-          message: `Failed to publish: ${error.message}`,
+    const payload = {
+      title: title,
+      overview: overview,
+      blocks: blocks,
+      author: "Mohamed",
+    };
+
+    console.log(payload)
+
+    mutate(payload, {
+      onSuccess: () => {
+        showToast("success", {
+          message: "Article created successfully!",
           toastId,
         });
-        return;
-      }
-
-      showToast("success", {
-        message: "Article Published successfully!",
-        toastId,
-      });
-      console.log("✅ Saved article:", data);
-    } catch (error) {
-      console.error("⚠️ Unexpected error", error);
-      showToast("error", {
-        message: "Something went wrong, please try again.",
-        toastId,
-      });
-    }
+      },
+      onError: (err: any) => {
+        showToast("error", {
+          message: err.message || "Failed to submit Article",
+          toastId,
+        });
+      },
+    });
   };
 
   return (
-    <div className="p-6 md:p-12 w-full bg-gray-200/75">
-      <div className="w-full flex items-center justify-between">
-        <h1 className="text-2xl md:text-4xl font-extrabold text-gray-800">
-          PUBLISH YOUR ARTICLE
-        </h1>
-        <button
-          onClick={handleSave}
-          className="px-4 w-24 py-2 bg-blue-600 text-white rounded-lg col-start-1 cursor-pointer"
-        >
-          Publish
-        </button>
-      </div>
+        <div className='pt-22 md:pt-12 md:ml-50 p-6 md:p-20 min-h-screen bg-(--secondary) overflow-hidden'>
+            <div className="w-full bg-white flex flex-col md:flex-row items-center justify-between gap-6 p-6 
+            rounded-t-lg shadow-md border-b border-gray-500">
 
-      <div className="rounded-lg shadow-md py-6 min-h-[100vh] px-4 mt-10 mb-15 bg-white">
-        <div id="editorjs" />
-      </div>
-    </div>
+                <div className='flex items-center justify-center gap-8'>
+                    <GoBackBtn />
+                    <div className='text-gray-500'>
+                        articles list  /  Create article
+                    </div>
+                </div>
+                <div className='hidden md:block'>
+                    <PublishBtn onClick={handleSave}/>
+                </div>
+
+            </div>
+            <div className="bg-white mb-10 p-2 md:p-8 rounded-b-lg min-h-screen">
+              <div className='border rounded-lg shadow-md min-h-screen p-4'>
+                <div id="editorjs" />
+              </div>
+              <div className='md:hidden w-full flex items-center justify-center mt-10'>
+                <PublishBtn />
+              </div>
+            </div>
+        </div>
   );
 }

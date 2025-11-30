@@ -7,7 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { ContactFormSchema } from "@/schemas/ContactFormSchema";
 import { ContactFormFields } from "@/schemas/ContactFormSchema";
 // Toast
-import { showToast } from "@/components/jobs/Toast";
+import { showToast } from "@/components/toast/Toast";
 
 function ContactForm() {
   const {
@@ -19,51 +19,50 @@ function ContactForm() {
     resolver: zodResolver(ContactFormSchema),
   });
 
-    const onSubmit: SubmitHandler<ContactFormFields> = async (data) => {
-        const toastId = showToast("loading", {
-            message: "Sending message...",
+  const onSubmit: SubmitHandler<ContactFormFields> = async (data) => {
+    const toastId = showToast("loading", {
+      message: "Sending message...",
+    });
+
+    const web3formsKey = process.env.NEXT_PUBLIC_WEB3FORMS_KEY!;
+
+    try {
+      const heading = "This message came from contact us form";
+      const formData = new FormData();
+      formData.append("access_key", web3formsKey);
+      formData.append("Heading", heading);
+      formData.append("Name", data.name);
+      formData.append("Email", data.email);
+      formData.append("What are you reaching out about?", data.reachingOut);
+      formData.append("Message", data.message);
+
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData,
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        showToast("success", {
+          message: "The message has been sent successfully!",
+          toastId,
         });
-
-      const web3formsKey = process.env.NEXT_PUBLIC_WEB3FORMS_KEY!;
-    
-        try {
-            const heading = "This message came from contact us form"
-            const formData = new FormData();
-            formData.append("access_key", web3formsKey);
-            formData.append("Heading", heading);
-            formData.append("Name", data.name);
-            formData.append("Email", data.email);
-            formData.append("What are you reaching out about?", data.reachingOut);
-            formData.append("Message", data.message);
-    
-            const response = await fetch("https://api.web3forms.com/submit", {
-                method: "POST",
-                body: formData,
-            });
-    
-            const result = await response.json();
-    
-            if (result.success) {
-                showToast("success", {
-                    message: "The message has been sent successfully!",
-                    toastId,
-                });
-                reset();
-            } else {
-                showToast("error", {
-                    message: "Something went wrong. Please try again.",
-                    toastId,
-                });
-            }
-        } catch (error) {
-            console.error(error);
-            showToast("error", {
-                message: "Failed to send the message, please try again later.",
-                toastId,
-            });
-        }
-    };
-
+        reset();
+      } else {
+        showToast("error", {
+          message: "Something went wrong. Please try again.",
+          toastId,
+        });
+      }
+    } catch (error) {
+      console.error(error);
+      showToast("error", {
+        message: "Failed to send the message, please try again later.",
+        toastId,
+      });
+    }
+  };
 
   return (
     <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>

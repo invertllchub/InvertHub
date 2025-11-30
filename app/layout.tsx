@@ -1,9 +1,12 @@
 import './(main)/globals.css';
 import { Geist, Geist_Mono } from "next/font/google";
+// Toast
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 // React Query Provider
 import { ReactQueryProvider } from '@/providers/ReactQueryProvider';
+import AutoLogout from '@/components/auto/AutoLogOut';
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,10 +36,11 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ReactQueryProvider>
+          <AutoLogout />
           {children}
           <ToastContainer
           position="bottom-right"
-          autoClose={3000}
+          autoClose={2000}
           hideProgressBar
           closeOnClick
           draggable

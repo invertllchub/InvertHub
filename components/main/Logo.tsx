@@ -6,7 +6,7 @@ import Link from "next/link";
 
 function Logo({ isDark }: { isDark: boolean }) {
     return (
-        <div className="transition-all duration-300">
+        <div>
             <Link href="/" aria-label="Home">
                 <div className="relative w-[170px] h-[60px]  z-10">
                     <Image

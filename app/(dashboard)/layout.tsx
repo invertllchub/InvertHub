@@ -1,5 +1,5 @@
 
-
+import '../(main)/globals.css'
 import dynamic from "next/dynamic";
 // Components
 const NavBar = dynamic(() => import("@/components/dashboard/Navbar"), {
