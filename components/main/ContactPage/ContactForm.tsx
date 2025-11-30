@@ -1,5 +1,5 @@
 import React from "react";
-import { useCallback } from "react";
+// Icons
 import { FaPaperPlane } from "react-icons/fa";
 // React-hook-form and validation with Zod
 import { useForm, SubmitHandler } from "react-hook-form";

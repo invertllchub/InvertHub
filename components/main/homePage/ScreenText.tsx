@@ -46,7 +46,7 @@ const ScreenText = () => {
     return (
         <>
         <div className="relative top-2/5 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white 
-        font-bold h-[40px] md:h-[60px] lg:h-[180px] flex justify-center items-center overflow-hidden">
+        font-bold h-10 md:h-[60px] lg:h-[180px] flex justify-center items-center overflow-hidden">
             <div ref={currentRef} className="absolute font-bold text-4xl md:text-6xl xl:text-[150px] leading-none">{texts[0]}</div>
             <div ref={nextRef} className="absolute font-bold text-4xl md:text-6xl xl:text-[150px] leading-none"></div>
         </div>
@@ -55,11 +55,11 @@ const ScreenText = () => {
             flex justify-between gap-10">
             <Link href="/projects" className="relative text-xl group">
                 PROJECTS
-                <span className="absolute left-0 -bottom-1 w-full h-[2px] bg-white scale-x-100 origin-left transition-transform duration-300 group-hover:scale-x-0"></span>
+                <span className="absolute left-0 -bottom-1 w-full h-0.5 bg-white scale-x-100 origin-left transition-transform duration-300 group-hover:scale-x-0"></span>
             </Link>
             <Link href="/services" className="relative text-xl group">
                 SERVICES
-                <span className="absolute left-0 -bottom-1 w-full h-[2px] bg-white scale-x-100 origin-left transition-transform duration-300 group-hover:scale-x-0"></span>
+                <span className="absolute left-0 -bottom-1 w-full h-0.5 bg-white scale-x-100 origin-left transition-transform duration-300 group-hover:scale-x-0"></span>
             </Link>
         </div>
         </>

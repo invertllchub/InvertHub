@@ -81,7 +81,6 @@ const onSubmit: SubmitHandler<EditJobFormFields> = async (data) => {
     benefits: ConvertTextareaToObject(data.benefits || ""),
   };
 
-
   mutate(payload, {
     onSuccess: () => {
       showToast("success", {

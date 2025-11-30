@@ -2,10 +2,14 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Search, Mail, Bell, User } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
+// Icons
+import { Search, Mail, Bell, User } from "lucide-react";
+// React Query & Hooks
 import useGetUser from "@/hooks/users/useGetUser";
+// Cookies
 import Cookies from "js-cookie";
+// Components
 import LogoutButton from "../Buttons/LogoutButton";
 
 function Toolbar() {
@@ -13,7 +17,9 @@ function Toolbar() {
     "https://res.cloudinary.com/dyfregti9/image/upload/v1761832027/INVERT-HUB/zvakmojuzfa5t9ty85r9.jpg";
 
     const userID = Cookies.get("id") || "";
-    const { data: user } = useGetUser(userID);
+    const {data: user} = useGetUser(userID, {
+        enabled: userID !== "",  
+    });
 
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);

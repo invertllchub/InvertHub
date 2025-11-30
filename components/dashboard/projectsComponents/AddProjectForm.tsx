@@ -18,7 +18,6 @@ const handleFileChange = (file: File) => {
     setValue("ImageUrl", file);
 };
 
-
   const {
     register,
     handleSubmit,
@@ -34,16 +33,12 @@ const handleFileChange = (file: File) => {
   const onSubmit: SubmitHandler<AddProjectFormFields> = async (data) => {
     const toastId = showToast("loading", { message: "Submitting project..." });
 
-      const formData = new FormData();
-      formData.append("Name", data.Name);
-      formData.append("Image", data.ImageUrl);
-      formData.append("Link", data.Link);
-      formData.append("Description", data.Description);
+    const formData = new FormData();
+    formData.append("Name", data.Name);
+    formData.append("Image", data.ImageUrl);
+    formData.append("Link", data.Link);
+    formData.append("Description", data.Description);
 
-
-for (const [key, value] of formData.entries()) {
-  console.log(key, value);
-}
 
     mutate(formData, {
       onSuccess: () => {

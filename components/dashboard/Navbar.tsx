@@ -5,9 +5,8 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 // Icons
-import { Newspaper, Building2, CircleUser , Briefcase, Users, Menu, X, House, LayoutDashboard  } from 'lucide-react';
-// Components
-import LogoutButton from "./Buttons/LogoutButton";
+import { Newspaper, Building2, Briefcase, Users, Menu, X, House, LayoutDashboard  } from 'lucide-react';
+
 
 
 
@@ -17,7 +16,6 @@ function NavBar() {
 
   const links = [
     { href: "/dashboard", label: "Dashboard", icon: <LayoutDashboard  size={20} /> },
-    // { href: "/dashboard/profile", label: "Profile", icon: <CircleUser  size={20} /> },
     { href: "/dashboard/projects", label: "Projects", icon: <Building2 size={20} /> },
     { href: "/dashboard/articles", label: "Articles", icon: <Newspaper size={20} /> },
     { href: "/dashboard/jobs", label: "Jobs", icon: <Briefcase size={20} /> },
@@ -72,9 +70,6 @@ function NavBar() {
             <span className="whitespace-nowrap">Return Home</span>
           </Link>
         </li>
-        {/* <li className="w-full">
-          <LogoutButton id="logout-btn" />
-        </li> */}
       </ul>
     </nav>
     </>

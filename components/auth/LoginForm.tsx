@@ -21,7 +21,6 @@ function LoginForm() {
   
   const {
     register,
-    reset,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<LoginFormFields>({
@@ -45,7 +44,6 @@ function LoginForm() {
           message: "Login Successfuly!",
           toastId,
         });
-        // reset();
       },
       onError: (err: any) => {
         showToast("error", {

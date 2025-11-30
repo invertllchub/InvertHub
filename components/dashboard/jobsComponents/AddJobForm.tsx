@@ -57,7 +57,6 @@ export default function AddJobForm() {
     benefits: ConvertTextareaToObject(data.benefits || ""),
     };
 
-    console.log(payload)
 
     mutate(payload, {
       onSuccess: () => {

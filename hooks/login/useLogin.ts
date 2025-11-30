@@ -9,7 +9,7 @@ async function loginAPI(data: { email: string; password: string }) {
 
   const json = await res.json();
 
-  if (!res.ok) throw new Error(json.message || "Login failed");
+  if (!res.ok) throw new Error(json.message);
 
   return json;
 }

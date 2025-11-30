@@ -11,10 +11,11 @@ import JobApplication from "@/components/jobs/JobApplication";
 import JobDetails from "@/components/jobs/JobDetails";
 // React Query
 import useGetJob from "@/hooks/jobs/useGetJob";
+// Loading & Error States
 import ErrorState from "@/components/states/ErrorState";
 import IsLoadingState from "@/components/states/IsLoadingState";
-//
-import { formatDate } from "@/utils/FormatDate";
+// Formate Date Function
+import formatDate from "@/utils/FormatDate";
 
 function Page() {
   const [showForm, setShowForm] = useState(false);
@@ -27,8 +28,8 @@ function Page() {
   const jobBannerDetails = [
     { icon: <Hourglass size={20} />, label: job?.employmentType },
     { icon: <MapPin size={20} />, label: job?.location },
-    { icon: <Calendar size={20} />, label: formatDate(job?.createdAt)  },
-    { icon: <Clock size={20} />, label: formatDate(job?.closingDate) },
+    { icon: <Calendar size={20} />, label: formatDate(job?.createdAt || "")  },
+    { icon: <Clock size={20} />, label: formatDate(job?.closingDate || "") },
   ];
 
   if (isError) {

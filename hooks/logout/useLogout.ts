@@ -6,7 +6,7 @@ async function logoutAPI() {
   });
 
   const data = await res.json();
-  if (!res.ok) throw new Error(data.message || "Logout failed");
+  if (!res.ok) throw new Error(data.message);
   return data;
 }
 

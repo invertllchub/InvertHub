@@ -1,12 +1,17 @@
 "use client";
 
+// React-hook-Form & Zod Validation
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { EditEmailSchema, EditEmailFormFields } from "@/schemas/users/EditEmailSchema";
+// Toast
 import { showToast } from "@/components/toast/Toast";
+// Types
 import { User } from "@/types/users";
-import useEditEmail from "@/hooks/users/useEditEmail";
+// Components
 import PublishBtn from "../Buttons/PublishBtn";
+// React Query & Hooks
+import useEditEmail from "@/hooks/users/useEditEmail";
 
 export default function EditEmail({ user }: { user: User }) {
   const { mutate } = useEditEmail();

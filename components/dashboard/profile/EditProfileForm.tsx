@@ -1,14 +1,19 @@
 "use client";
 
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
+// React-Hook-Form & Zod Validation
 import { zodResolver } from "@hookform/resolvers/zod";
 import { EditProfileSchema, EditProfileFormFields } from "@/schemas/profile/EditProfileSchema";
+// Toast
 import { showToast } from "@/components/toast/Toast";
+// React-Phone-Number
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
+// Types
 import { User } from "@/types/users";
+// Components
 import PublishBtn from "../Buttons/PublishBtn";
-import Cookies from "js-cookie";
+// React Query & Hooks
 import useEditProfile from "@/hooks/profile/useEditProfile";
 
 export default function EditProfileForm({ user }: { user: User }) {
@@ -18,16 +23,9 @@ export default function EditProfileForm({ user }: { user: User }) {
   const { mutate } = useEditProfile();
   const userId = user.id;
 
-  const role = Cookies.get("role");
-
   const genders = [
     { value: "Male", label: "Male" },
     { value: "Female", label: "Female" },
-  ];
-
-  const roles = [
-    { value: "Admin", label: "Admin" },
-    { value: "User", label: "User" },
   ];
 
   function approximateBirthDateFromAge(age: number) {

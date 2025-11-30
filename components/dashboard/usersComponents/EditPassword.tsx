@@ -1,13 +1,19 @@
 "use client";
 
+import { useState } from "react";
+// React-hook-Form & Zod Validation
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { EditPassFormFields, EditPassSchema } from "@/schemas/users/EditPasswordSchema";
+// Toast
 import { showToast } from "@/components/toast/Toast";
+// Types
 import { User } from "@/types/users";
+// Components
 import PublishBtn from "../Buttons/PublishBtn";
+// Icons
 import { Eye, EyeOff } from "lucide-react";
-import { useState } from "react";
+// React Query & Hooks
 import useEditPass from "@/hooks/users/useEditPass";
 
 export default function EditPassword({ user }: { user: User }) {

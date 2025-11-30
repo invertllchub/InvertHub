@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import {ArticlePdf} from "./ArticlePdf"
 import { Block } from "@/types/articles";

@@ -1,7 +1,8 @@
 import { useMutation } from "@tanstack/react-query";
 
 async function deleteUserAPI(id?: string) {
-     if (!id) throw new Error("ID is required");
+  if (!id) throw new Error("ID is required");
+  
   const res = await fetch(`/api/users/delete`, {
     method: "DELETE",
     headers: { "Content-Type": "application/json" },

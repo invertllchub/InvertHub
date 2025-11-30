@@ -1,5 +1,7 @@
 import React from "react";
+// Types
 import { Job } from "@/types/jobs";
+// Components
 import ShareButton from "./ShareButton";
 
 type JobProps = {

@@ -1,4 +1,4 @@
-import React from "react";
+
 // React-hook-form and validation with Zod
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -61,7 +61,7 @@ function SubscribeForm() {
         type="email"
         {...register("email")}
         placeholder="Your email address"
-        className="flex-grow px-4 py-3 text-gray-700 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-400"
+        className="grow px-4 py-3 text-gray-700 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-400"
       />
       {errors.email && (
         <div className="text-red-600">{errors.email.message}</div>
