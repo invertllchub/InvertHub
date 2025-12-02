@@ -25,7 +25,7 @@ export default function EditArticlePage() {
   const editorRef = useRef<EditorJS | null>(null);
   const [articles, setArticles] = useState<Article []>([])
   const params = useParams();
-  const articleId = Number(params.id);
+  const articleId = (params.id);
   const article = articles.find((p) => p.id === articleId);
 
 

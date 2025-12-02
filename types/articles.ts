@@ -4,7 +4,7 @@ export interface Block {
 }
 
 export interface Article {
-  id: number;
+  id: string;
   time: number;
   blocks: {
     type: string;

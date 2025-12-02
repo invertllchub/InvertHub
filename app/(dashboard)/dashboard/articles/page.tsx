@@ -12,18 +12,12 @@ const Table = dynamic(() => import("@/components/dashboard/Table"), {
 import useGetArticles from "@/hooks/articles/useGetArticles";
 // Types
 import { Article } from "@/types/articles";
+import formatDate from "@/utils/FormatDate";
 
 function Page() {
   const { data: articles = [] } = useGetArticles();
   const [searchValue, setSearchValue] = useState("");
 
-  const formatDate = (timestamp: number) => {
-    return new Date(timestamp).toLocaleDateString("en-GB", {
-      day: "2-digit",
-      month: "2-digit",
-      year: "numeric",
-    });
-  };
 
   const filteredArticles = useMemo(() => {
     if (!articles.length) return [];
@@ -33,7 +27,7 @@ function Page() {
       .map((article) => {
         const titleBlock = article.blocks.find((b) => b.type === "header");
         const title = titleBlock?.data.text || "Untitled";
-        const date = formatDate(article.time);
+        const date = formatDate(String(article.time));
 
         return {
           ...article,

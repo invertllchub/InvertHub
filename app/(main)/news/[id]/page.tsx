@@ -8,7 +8,7 @@ import useGetArticles from "@/hooks/articles/useGetArticles";
 function Page() {
   const { data: articles = [], isLoading, error } = useGetArticles();
   const params = useParams();
-  const articleId = Number(params.id);
+  const articleId = (params.id);
   const article = articles.find((p) => p.id === articleId);
 
   if (isLoading) {
