@@ -26,7 +26,15 @@ const MobileCard = <T extends { id: string }>({
                 className="bg-white p-5 rounded-xl shadow-sm border transition-all duration-150 active:scale-[0.98]"
                 >
                     <Link
-                    href={`/dashboard/${page}/${item.id}/${page === "users" ? "user-profile" : "edit"}`}
+                    href={`/dashboard/${page}/${item.id}/${
+                    page === "users"
+                    ? "user-profile"
+                    : page === "jobs"
+                    ? "job-details"
+                    : page === "projects"
+                    ? "project-details"
+                    : "edit"
+                    }`}
                     >
                         {columns.map((col) => (
                             <p key={col.key} className='text-sm text-gray-600'>
