@@ -55,7 +55,7 @@ function LoginForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form autoComplete="on" onSubmit={handleSubmit(onSubmit)}>
       <div className="w-full flex flex-col gap-4 p-4">
         <div className="w-full">
           <label htmlFor="email">Email</label>

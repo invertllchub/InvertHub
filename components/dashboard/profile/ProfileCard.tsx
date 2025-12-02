@@ -1,7 +1,9 @@
-import React from 'react'
-import { User } from '@/types/users'
+
 import Link from 'next/link'
 import Image from 'next/image'
+// Types
+import { User } from '@/types/users'
+// Icons
 import { Pencil } from 'lucide-react'
 
 type userProp = {
@@ -17,7 +19,7 @@ function ProfileCard({user}: userProp) {
                 <h2 className="text-xl md:text-2xl font-semibold text-gray-700">User Profile</h2>
                 <Link
                 title='Edit user profile'
-                href={`/dashboard/users/${user?.id}/user-profile/edit`}
+                href={`/dashboard/profile/${user?.id}/edit`}
                 >
                     <Pencil size={20} className=" text-gray-500 cursor-pointer" />
                 </Link>

@@ -81,7 +81,7 @@ function page() {
       </div>
 
       {/* CARD VIEW (Mobile) */}
-      <div className="block md:hidden mt-6  space-y-4">
+      <div className="block md:hidden mt-6 space-y-4">
         <MobileCard
           page="projects"
           columns={columns}
