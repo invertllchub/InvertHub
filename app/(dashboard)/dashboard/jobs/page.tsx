@@ -33,6 +33,7 @@ function JobsPage() {
   const jobs = data?.data?.data || [];
   const totalPages = data?.data?.pagination?.totalPages ?? 1;
 
+
   useEffect(() => {
     const nextPage = currentPage + 1;
     if (nextPage > 2) return;
@@ -46,10 +47,6 @@ function JobsPage() {
     { key: "title", label: "Title" },
     { key: "employmentType", label: "Employment Type" },
     { key: "status", label: "Status" },
-    { key: "createdBy", label: "created By" },
-    { key: "createdAt", label: "created At" },
-    { key: "updatedBy", label: "updated By" },
-    { key: "updatedAt", label: "updated At" },
     { key: "closingDate", label: "Closing Date" },
   ];
 

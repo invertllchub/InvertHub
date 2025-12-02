@@ -4,6 +4,10 @@ export type Project = {
   description: string;
   imageUrl: string;
   link: string;
+  createdAt: string;
+  createdBy: string;
+  updatedAt: string;
+  updatedBy: string;
 };
 export type projects = {
   projects: Project[]

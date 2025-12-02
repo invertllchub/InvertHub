@@ -8,6 +8,7 @@ import useGetProjectsWithPagination from "@/hooks/projects/useGetProjectsWithPag
 import { useHomeAnimations } from "@/hooks/useHomeAnimations ";
 
 function Section4() {
+  const defaultImage = "https://res.cloudinary.com/dyfregti9/image/upload/v1761832027/INVERT-HUB/zvakmojuzfa5t9ty85r9.jpg"
   const verticalRef = useRef<HTMLDivElement>(null);
   const { data, isLoading, isError } = useGetProjectsWithPagination(1, 4, "");
   const projects = data?.data?.data || [];
@@ -47,7 +48,7 @@ function Section4() {
           >
             <div className="relative w-full sm:w-1/2 h-[60vh] md:h-full">
               <Image
-                src={item.imageUrl}
+                src={item.imageUrl || defaultImage}
                 alt={item.name}
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"

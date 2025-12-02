@@ -13,9 +13,11 @@ import { showToast } from "@/components/toast/Toast";
 import { ConvertObjectToTextarea } from "@/utils/ConvertObjectToTextarea";
 import { ConvertTextareaToObject } from "@/utils/ConvertTextareaToObject";
 // React Query Hook
+import { useQueryClient } from "@tanstack/react-query";
 import useEditJob from "@/hooks/jobs/useEditJob";
 // Components
 import PublishBtn from "../Buttons/PublishBtn";
+import formatDateForInput from "@/utils/FormatDateForInput";
 
 
 
@@ -25,6 +27,7 @@ type JobProps = {
 };
 
 export default function EditJobForm({ job, status }: JobProps) {
+   const queryClient = useQueryClient();
   const { mutate } = useEditJob();
   const jobId = job.id;
 
@@ -54,7 +57,7 @@ export default function EditJobForm({ job, status }: JobProps) {
       location: job.location,
       employmentType: job.employmentType,
       experienceLevel: job.experienceLevel,
-      closingDate: job.closingDate,
+      closingDate: formatDateForInput(job.closingDate),
       description: job.description,
       keyResponsibilities: ConvertObjectToTextarea(job.keyResponsibilities),
       requirements: ConvertObjectToTextarea(job.requirements),
@@ -87,6 +90,7 @@ const onSubmit: SubmitHandler<EditJobFormFields> = async (data) => {
         message: "Job updated successfully!",
         toastId,
       });
+      queryClient.invalidateQueries({ queryKey: ["jobs"] });
       reset();
     },
     onError: (err: any) => {

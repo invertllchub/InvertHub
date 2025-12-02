@@ -8,7 +8,10 @@ import { EditProjectFormFields } from "@/schemas/projects/EditProjectSchema";
 import { showToast } from "@/components/toast/Toast";
 // types
 import { Project } from "@/types/project";
+// React Query & Hooks
 import useEditProject from "@/hooks/projects/useEditProject";
+import { useQueryClient } from "@tanstack/react-query";
+// Components
 import PublishBtn from "../Buttons/PublishBtn";
 // props
 type ProjectProp = {
@@ -16,6 +19,7 @@ type ProjectProp = {
 };
 
 function EditProjectForm({ project }: ProjectProp) {
+  const queryClient = useQueryClient();
   const { mutate } = useEditProject();
   const [preview, setPreview] = useState<string>(project.imageUrl || "");
   const projectId = project.id;
@@ -41,7 +45,7 @@ function EditProjectForm({ project }: ProjectProp) {
   });
 
   const onSubmit: SubmitHandler<EditProjectFormFields> = async (data) => {
-    const toastId = showToast("loading", { message: "Submitting Project..." });
+    const toastId = showToast("loading", { message: "Updateing Project..." });
 
     const formData = new FormData();
     formData.append("id", projectId.toString());
@@ -53,14 +57,15 @@ function EditProjectForm({ project }: ProjectProp) {
     mutate(formData, {
       onSuccess: () => {
         showToast("success", {
-          message: "Project created successfully!",
+          message: "Project updated successfully!",
           toastId,
         });
+        queryClient.invalidateQueries({ queryKey: ["projects"] });
         reset();
       },
       onError: (err: any) => {
         showToast("error", {
-          message: err.message || "Failed to submit Project",
+          message: err.message,
           toastId,
         });
       },

@@ -41,7 +41,15 @@ const gridColumns = [...(columns.map(col => col.width || "1fr"))].filter(Boolean
         const isDisabled = (item as any).isActive === false;
         return (
         <Link
-          href={`/dashboard/${page}/${item.id}/edit`}
+        href={`/dashboard/${page}/${item.id}/${
+          page === "users"
+            ? "user-profile"
+            : page === "jobs"
+            ? "job-details"
+            : page === "projects"
+            ? "project-details"
+            : "edit"
+        }`}
           key={item.id}
           className={`grid gap-8 p-4 my-1.5 shadow-sm text-gray-600 bg-white hover:bg-gray-100 
             duration-150 transition-all active:scale-[0.98]

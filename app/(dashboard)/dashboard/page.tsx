@@ -4,9 +4,11 @@ import RecentActivity from '@/components/dashboard/homeComponents/RecentActivity
 import StaticCard from '@/components/dashboard/homeComponents/StaticCard';
 import Toolbar from '@/components/dashboard/homeComponents/Toolbar';
 import VisitorsChart from '@/components/dashboard/homeComponents/VisitorsChart';
+import useGetActivities from '@/hooks/useGetActivities';
 
 
 function page() {
+  const {data: activities =[]} = useGetActivities();
   
   const statics = [
   {label : "Projects", value: "15", href: "/dashboard/projects"},
@@ -30,8 +32,11 @@ function page() {
           <div className=' bg-white rounded-lg shadow-md p-4'>
             <VisitorsChart />
           </div>
-          <div className='bg-white rounded-lg shadow-md'>
-            <RecentActivity />
+          <div className='bg-white rounded-lg shadow-md p-4'>
+            <h1 className='font-semibold'>Last Events</h1>
+            <div className='overflow-y-auto '>
+              <RecentActivity activities={activities}/>
+            </div>
           </div>
         </div>
       </div>

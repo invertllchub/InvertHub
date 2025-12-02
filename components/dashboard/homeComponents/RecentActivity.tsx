@@ -1,14 +1,17 @@
 // React Query
-import useGetActivities from "@/hooks/useGetActivities";
+import { Activity } from "@/types/activities";
 
-export default function RecentActivity() {
-    const {data: activities = []} = useGetActivities();
+type ActivitiesProp = {
+    activities: Activity[]
+}
+
+export default function RecentActivity({activities}: ActivitiesProp) {
+    // const {data: activities = []} = useGetActivities();
 
 
     return (
-        <div className="bg-white dark:bg-slate-800 rounded-2xl p-4 shadow-sm">
-            <h3 className="text-lg font-semibold mb-3">Last Events</h3>
-            <div className="max-h-80 overflow-y-auto">
+        <div className="w-full dark:bg-slate-800 p-4">
+            <div className="max-h-80">
                 <ul className="space-y-3">
                     {activities.length === 0 && <li className="text-sm text-gray-500">No event yet.</li>}
                     {activities.map((a: any) => (

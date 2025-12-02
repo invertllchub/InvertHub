@@ -61,7 +61,8 @@ function LoginForm() {
           <label htmlFor="email">Email</label>
           <input
             id="email"
-            type="text"
+            autoComplete="email"
+            type="email"
             {...register("email")}
             placeholder="Enter Your Email"
             className="border border-gray-500 outline-0 px-4 py-2 rounded-md w-full my-2"
@@ -75,6 +76,7 @@ function LoginForm() {
           <div className="relative">
             <input
               id="password"
+              autoComplete="current-password"
               type={show ? "text" : "password"}
               {...register("password")}
               placeholder="Enter Your Password.."

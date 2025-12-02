@@ -5,8 +5,6 @@ export default function formatDate(dateTimeString: string): string {
     year: "numeric",
     month: "short",
     day: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
   });
 }
 

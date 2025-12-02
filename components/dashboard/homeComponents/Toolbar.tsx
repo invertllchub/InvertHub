@@ -4,13 +4,14 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
 // Icons
-import { Search, Mail, Bell, User } from "lucide-react";
+import { Settings, Bell } from "lucide-react";
 // React Query & Hooks
 import useGetUser from "@/hooks/users/useGetUser";
 // Cookies
 import Cookies from "js-cookie";
 // Components
 import LogoutButton from "../Buttons/LogoutButton";
+
 
 function Toolbar() {
     const defaultImage =
@@ -40,53 +41,20 @@ function Toolbar() {
 
     return (
         <div className="w-full h-22 bg-white rounded-full shadow-md flex items-center justify-between px-5 md:px-10">
-            {/* Search */}
-            <div className="w-1/2">
-                <div className="w-full md:w-6/12 relative bg-white rounded-full">
-                    <input
-                    type="text"
-                    placeholder="Search"
-                    className="w-full px-10 py-3.5 md:py-3 outline-none border border-(--secondary) rounded-full"
-                    />
-                    <div className="absolute top-1/2 -translate-y-1/2 left-2">
-                        <Search size={20} />
-                    </div>
-                </div>
-            </div>
 
-            {/* Icons + Profile */}
-            <div className="flex items-center justify-between gap-6">
-                <div className="flex gap-2 md:gap-4">
-                    <Bell />
-                    <Mail />
-                </div>
-
-                {/* Profile Dropdown */}
-                <div className="relative" ref={dropdownRef}>
+            <div className="flex items-center gap-3">
+                <div 
+                className="relative flex items-center" ref={dropdownRef}
+                >
                     <button
-                    className="flex items-center justify-center w-15 h-15 rounded-full overflow-hidden border border-gray-200 cursor-pointer"
                     onClick={() => setIsOpen((prev) => !prev)}
                     >
-                        <Image
-                        title="Edit Profile"
-                        alt="profile picture"
-                        src={user?.imageUrl || defaultImage}
-                        width={50}
-                        height={50}
-                        className="object-cover rounded-full"
-                        />
+                        <Settings className="cursor-pointer hover:rotate-45"/>
                     </button>
 
                     {/* Dropdown menu */}
                     {isOpen && (
-                        <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
-                            <Link
-                            href="/dashboard/profile"
-                            className="flex items-center gap-3 py-4 px-4 hover:bg-gray-100 transition"
-                            >
-                                <User size={20}/>
-                                <span className="whitespace-nowrap">Profile</span>
-                            </Link>
+                        <div className="absolute -left-2 top-6 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
                             <div
                             className="w-full hover:bg-gray-100 transition"
                             >
@@ -94,6 +62,29 @@ function Toolbar() {
                             </div>
                         </div>
                     )}
+                </div>
+                <Bell />
+            </div>
+            
+            {/* Icons + Profile */}
+            <div className="flex items-center justify-between gap-6">
+
+
+                {/* Profile Dropdown */}
+                <div>
+                    <Link
+                    href={'/dashboard/profile'}
+                    className="flex items-center justify-center w-15 h-15 rounded-full overflow-hidden border border-gray-200 cursor-pointer"
+                    >
+                        <Image
+                        title="Profile"
+                        alt="profile picture"
+                        src={user?.imageUrl || defaultImage}
+                        width={50}
+                        height={50}
+                        className="object-cover rounded-full"
+                        />
+                    </Link>
                 </div>
 
                 {/* User info */}

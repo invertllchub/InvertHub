@@ -1,13 +1,24 @@
 import { z } from "zod";
 
 export const EditProjectSchema = z.object({
-    Name: z.string().min(3, "Name is required"),
-    Description: z.string().min(10, "Description is required"),
+    Name: z.string().min(3, "Name must be at least 3 characters long"),
+    Description: z.string().min(10, "Description must be at least 10 characters long"),
     ImageUrl: z
-        .instanceof(File) 
-        .refine((file) => ["image/jpeg", "image/png", "image/webp"].includes(file.type), {
-            message: "Only JPG, PNG, or WEBP files are allowed",
-        }),
+        .union([
+            z.string().optional(), 
+            z.any().optional(),         
+        ])
+        .refine(
+            (file) => {
+                if (!file || file === "" || (Array.isArray(file) && file.length === 0)) return true;
+
+                if (typeof file === "string") return true;
+
+                const f = Array.isArray(file) ? file[0] : file;
+                return ["image/jpeg", "image/png", "image/webp"].includes(f?.type);
+            },
+            { message: "Only JPG, PNG, or WEBP files are allowed" }
+        ),
     Link: z
         .string()
         .regex(

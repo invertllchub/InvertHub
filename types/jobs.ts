@@ -10,12 +10,14 @@ export interface Job {
   experienceLevel: ExperienceLevel;
   status: JobStatus;
   createdAt: string;
+  createdBy: string;
+  updatedAt: string;
+  updatedBy: string;
   closingDate: string;
   description: string;
-keyResponsibilities: Record<string, string>;
-requirements: Record<string, string>;
-benefits: Record<string, string>;
-
+  keyResponsibilities: Record<string, string>;
+  requirements: Record<string, string>;
+  benefits: Record<string, string>;
 }
 
 export interface JobsResponse {

@@ -1,20 +1,18 @@
 "use client";
 
 import { useParams } from "next/navigation";
+import { useEffect, useState } from "react";
 // Components
 import GoBackBtn from "@/components/dashboard/Buttons/GoBackBtn";
 import EditUserForm from "@/components/dashboard/usersComponents/EditUserForm";
 import EditEmail from "@/components/dashboard/usersComponents/EditEmail";
 import EditPassword from "@/components/dashboard/usersComponents/EditPassword";
-import DeleteBtn from "@/components/dashboard/Buttons/DeleteBtn";
+import DropDownBtn from "@/components/dashboard/Buttons/DropDownBtn";
 // React Query & Hooks
 import useGetUser from "@/hooks/users/useGetUser";
-import useDeleteUser from "@/hooks/users/useDeleteUser";
 // Loading & Error State
 import ErrorState from "@/components/states/ErrorState";
 import IsLoadingState from "@/components/states/IsLoadingState";
-import { useEffect, useState } from "react";
-import DropDownBtn from "@/components/dashboard/Buttons/DropDownBtn";
 
 
 
@@ -24,7 +22,7 @@ function page() {
     { label: "Active", value: "true" },
     { label: "Disabled", value: "false" },
   ] as const;
-  const { mutate } = useDeleteUser();
+
   const params = useParams();
   const userID = params.id as string;
   const {data: user, isLoading, isError} = useGetUser(userID, {
@@ -80,13 +78,6 @@ function page() {
             </div>
             <div className="bg-white mb-10 rounded-lg shadow-md p-6 md:p-12">
               <EditPassword user={user}/>
-            </div>
-            <div className="bg-white mb-10 rounded-lg shadow-md p-6 md:p-12">
-              <DeleteBtn 
-              item="User" 
-              id={user.id}
-              deleteFn={mutate}
-              />
             </div>
           </div>
         }

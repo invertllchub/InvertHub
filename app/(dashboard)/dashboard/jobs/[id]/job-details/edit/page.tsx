@@ -6,14 +6,10 @@ import { useEffect, useState } from "react";
 import EditJobForm from "@/components/dashboard/jobsComponents/EditjobForm";
 import GoBackBtn from "@/components/dashboard/Buttons/GoBackBtn";
 import DropDownBtn from "@/components/dashboard/Buttons/DropDownBtn";
-import DeleteBtn from "@/components/dashboard/Buttons/DeleteBtn";
 // Types
 import { JobStatus } from "@/types/jobs";
 // React Query & Hooks
 import useGetJob from "@/hooks/jobs/useGetJob";
-import useDeleteJob from "@/hooks/jobs/useDeleteJob";
-// Cokkies
-import Cookies from "js-cookie";
 // Loading & Error States
 import ErrorState from "@/components/states/ErrorState";
 import IsLoadingState from "@/components/states/IsLoadingState";
@@ -25,8 +21,7 @@ function Page() {
     { label: "Available", value: "Available" },
     { label: "Not Available", value: "NotAvailable" },
   ];
-  const { mutate } = useDeleteJob();
-  const role = Cookies.get("role");
+
   const params = useParams();
   const jobID = params.id as string;
   const {data: job, isLoading, isError} = useGetJob(jobID, {
@@ -78,15 +73,7 @@ function Page() {
               <div className="bg-white mb-10 rounded-b-lg shadow-md p-6 md:p-12">
                 <EditJobForm job={job} status={selectedOption} />
               </div>
-              {role === "Admin" && 
-                <div className="bg-white mb-10 rounded-lg shadow-md p-6 md:p-12">
-                  <DeleteBtn 
-                  item="Job" 
-                  id={job.id}
-                  deleteFn={mutate}
-                  />
-                </div>
-              }
+
           </div>
         }
       </div>

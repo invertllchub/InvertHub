@@ -17,6 +17,7 @@ import { User } from "@/types/users";
 import PublishBtn from "../Buttons/PublishBtn";
 // React Query & Hooks
 import useEditUser from "@/hooks/users/useEditUser";
+import { useQueryClient } from "@tanstack/react-query";
 
 
 type JobProps = {
@@ -28,6 +29,7 @@ export default function EditUserForm({ user, status }: JobProps) {
   const defaultImage =
     "https://res.cloudinary.com/dyfregti9/image/upload/v1761832027/INVERT-HUB/zvakmojuzfa5t9ty85r9.jpg";
   // const [preview, setPreview] = useState<string>(user.imageUrl || defaultImage);
+  const queryClient = useQueryClient();
   const { mutate } = useEditUser();
   const userId = user.id;
 
@@ -102,6 +104,7 @@ export default function EditUserForm({ user, status }: JobProps) {
     mutate(payload, {
       onSuccess: () => {
         showToast("success", { message: "User updated successfully!", toastId });
+        queryClient.invalidateQueries({ queryKey: ["users"] });
         reset();
       },
       onError: (err: any) => {

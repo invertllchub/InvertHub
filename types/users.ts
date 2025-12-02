@@ -15,7 +15,11 @@ export type User = {
   jobTitle: string;
   email: string;
   hashPassword: string;
-  isActive: boolean
+  isActive: boolean;
+  createdAt: string;
+  createdBy: string;
+  updatedAt: string;
+  updatedBy: string;
 }
 
 export interface UserResponse {

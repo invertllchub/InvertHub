@@ -5,6 +5,7 @@ import { Trash2 } from "lucide-react";
 import { showToast } from "@/components/toast/Toast";
 import { useRouter } from "next/navigation";
 import CustomModal from "@/components/modal/CustomModal";
+import { useQueryClient } from "@tanstack/react-query";
 
 type DeleteSectionProps = {
   id: string;
@@ -13,6 +14,7 @@ type DeleteSectionProps = {
 };
 
 export default function DeleteBtn({ id, item, deleteFn }: DeleteSectionProps) {
+  const queryClient = useQueryClient();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
@@ -28,6 +30,7 @@ export default function DeleteBtn({ id, item, deleteFn }: DeleteSectionProps) {
     deleteFn(id, {
       onSuccess: () => {
         showToast("success", { message: `${item} deleted successfully!`, toastId });
+        queryClient.invalidateQueries({ queryKey: [item.toLowerCase() + "s"] });
         setLoading(false);
         router.back();
       },
@@ -39,9 +42,9 @@ export default function DeleteBtn({ id, item, deleteFn }: DeleteSectionProps) {
   };
 
   return (
-    <div className="w-full flex flex-col md:flex-row justify-between items-center md:items-end gap-10">
+    <div>
       
-      <div>
+      {/* <div>
         <h2 className="text-xl md:text-2xl font-semibold text-gray-900 mb-2">
           🗑️ Delete {item}
         </h2>
@@ -49,22 +52,18 @@ export default function DeleteBtn({ id, item, deleteFn }: DeleteSectionProps) {
           Removing an item is a permanent action. Once deleted, all related data will be lost 
           and cannot be restored. Use this option only if you're sure.
         </p>
-      </div>
+      </div> */}
 
       <div className="flex justify-end">
         <button
           onClick={() => setModalOpen(true)}
           disabled={loading}
-          className="
-            flex items-center gap-2 justify-center cursor-pointer
-            bg-red-50 text-red-600 hover:bg-red-100 hover:text-red-700
-            transition-all duration-200
-            px-5 py-3 rounded-xl border border-red-200 shadow-sm font-medium
-            active:scale-95
-          "
-        >
+          className="flex items-center gap-2 px-3 py-1.5 cursor-pointer bg-red-50 text-red-600
+          rounded-xl text-sm font-medium hover:bg-red-100 transitionshadow-sm"
+          >
+        
           <Trash2 size={20} />
-          {loading ? "Deleting..." : `Delete ${item}`}
+          {loading ? "Deleting..." : `Delete`}
         </button>
       </div>
 
