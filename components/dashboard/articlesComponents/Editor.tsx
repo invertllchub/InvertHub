@@ -130,7 +130,7 @@ export default function Editor() {
                     </div>
                 </div>
                 <div className='hidden md:block'>
-                    <PublishBtn onClick={handleSave}/>
+                    <PublishBtn text="Publlish Now" onClick={handleSave}/>
                 </div>
 
             </div>
@@ -139,7 +139,7 @@ export default function Editor() {
                 <div id="editorjs" />
               </div>
               <div className='md:hidden w-full flex items-center justify-center mt-10'>
-                <PublishBtn />
+                <PublishBtn text="Publlish Now" onClick={handleSave}/>
               </div>
             </div>
         </div>
