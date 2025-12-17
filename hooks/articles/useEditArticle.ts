@@ -2,7 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 
 async function editArticleAPI(payload: any) {
   const res = await fetch("/api/articles/put", {
-    method: "POST",
+    method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
   });

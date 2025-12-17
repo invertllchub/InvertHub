@@ -16,7 +16,7 @@ interface TableProps<T> {
   renderActions?: (item: T) => React.ReactNode;
 }
 
-const Table = <T extends { id: number | string }>({
+const Table = <T extends { id: number | string, slug?: string }>({
   page,
   data,
   columns,
@@ -41,13 +41,18 @@ const gridColumns = [...(columns.map(col => col.width || "1fr"))].filter(Boolean
         const isDisabled = (item as any).isActive === false;
         return (
         <Link
-        href={`/dashboard/${page}/${item.id}/${
+        href={`/dashboard/${page}/${
+          page === "articles"
+          ? item.slug
+          : item.id}/${
           page === "users"
             ? "user-profile"
             : page === "jobs"
             ? "job-details"
             : page === "projects"
             ? "project-details"
+            : page === "articles"
+            ? "article-details"
             : "edit"
         }`}
           key={item.id}

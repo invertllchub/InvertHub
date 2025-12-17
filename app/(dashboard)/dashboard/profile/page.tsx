@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 // Cookies
 import Cookies from "js-cookie";
 // Hooks & React Query
@@ -14,15 +13,10 @@ import TeamCard from "@/components/dashboard/profile/TeamCard";
 
 
 function ProfilePage() {
-  const [userID, setUserID] = useState("");
+  const userID = Cookies.get("id");
 
-  useEffect(() => {
-    const idFromCookie = Cookies.get("id");
-    if (idFromCookie) setUserID(idFromCookie);
-  }, []);
-
-  const {data: user, isLoading, isError} = useGetUser(userID, {
-    enabled: userID !== "",  
+  const {data: user, isLoading, isError} = useGetUser(userID ?? "", {
+    enabled:  !!userID,
   });
 
 

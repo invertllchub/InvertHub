@@ -2,148 +2,119 @@
 
 import React from "react";
 import Image from "next/image";
-import Link from "next/link";
 // types
 import { Article, Block } from "@/types/articles";
-import DownloadArticleButton from "./DownloadArticleButton";
+
 
 interface Props {
   article: Article;
 }
 
 const ArticlePage: React.FC<Props> = ({ article }) => {
+  const blocks = article?.content?.blocks ?? [];
+
   return (
-    <div className="p-6 md:p-16 mt-20" id="article-content">
-      <div className="w-full flex justify-between">
-        <time className="text-sm text-gray-500 mb-3 block">
-          {new Date(article.time).toLocaleDateString("en-US", {
-            year: "numeric",
-            month: "short",
-            day: "numeric",
-          })}
-        </time>
-        <DownloadArticleButton blocks={article.blocks} fileName={`${article.blocks[0].data.text}.pdf`} />
+    <div className="mt-20" id="article-content">
+
+      <div className="relative w-full h-90 md:h-180 mb-14 overflow-hidden rounded-t-3xl">
+
+        {/* Image */}
+        <Image
+          src={article.coverImageUrl || "/placeholder.jpg"}
+          alt={article.title}
+          fill
+          priority
+          className="object-cover"
+        />
+
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-black/60" />
+
+        {/* Content */}
+        <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center px-6 text-white">
+          <h1 className="text-4xl md:text-6xl font-extrabold mb-4 leading-tight max-w-4xl">
+            {article.title}
+          </h1>
+          {article.subTitle && (
+            <p className="text-lg md:text-2xl text-gray-200 mb-6 max-w-3xl">
+              {article.subTitle}
+            </p>
+          )}
+        </div>
       </div>
 
-      {article.blocks.map((block: Block, i: number) => {
-        switch (block.type) {
-          case "header":
-            return React.createElement(
-              `h${block.data.level || 2}`,
-              {
-                key: i,
-                className:
-                  "text-3xl md:text-5xl font-bold mt-10 mb-3 text-gray-800",
-              },
-              block.data.text
-            );
+      <div className="text-3xl px-10 leading-relaxed my-6 text-center">
+        "{article.seo?.ogDescription}"
+      </div>
 
-          case "overview":
-            return (
-              <p
-                key={i}
-                className="text-md md:text-3xl font-bold my-2 text-gray-800"
-              >
-                {block.data.text}
-              </p>
-            );
+      <div className="p-6 md:p-16 mt-20">
+        <div className="max-w-6xl mx-auto border-t border-gray-400">
+          {blocks.map((block: Block, i: number) => {
+            switch (block.type) {
+      
+              case "header":
+                return (
+                  <h1
+                  key={i}
+                  className="text-3xl font-bold px-30 py-4"
+                  >
+                    {block.data.text}
+                  </h1>
+                );
 
-          case "paragraph":
-            return (
-              <p
-                key={i}
-                className="text-xl md:text-xl font-bold my-5 text-gray-600"
-              >
-                {block.data.text}
-              </p>
-            );
+              case "paragraph":
+                return (
+                  <p
+                    key={i}
+                    className="text-2xl px-30 leading-relaxed my-6 "
+                  >
+                    {block.data.text}
+                  </p>
+                );
 
-          case "list":
-            return block.data.style === "ordered" ? (
-              <ol
-                key={i}
-                className="list-decimal list-inside pl-6 space-y-2 my-6 text-gray-700"
-              >
-                {block.data.items.map((item: string, idx: number) => (
-                  <li key={idx}>{item}</li>
-                ))}
-              </ol>
-            ) : (
-              <ul
-                key={i}
-                className="list-disc list-inside pl-6 space-y-2 my-6 text-gray-700"
-              >
-                {block.data.items.map((item: string, idx: number) => (
-                  <li key={idx}>{item}</li>
-                ))}
-              </ul>
-            );
+              case "list":
+                return block.data.style === "ordered" ? (
+                  <ol
+                    key={i}
+                    className="text-xl list-decimal list-inside px-30 space-y-2 my-6 text-gray-700"
+                  >
+                    {block.data.items.map((item: any, idx: number) => {
+                      const text = typeof item === "string" ? item : item.text || "";
+                      return <li key={idx}>{text}</li>;
+                    })}
+                  </ol>
+                ) : (
+                  <ul
+                    key={i}
+                    className="text-xl list-disc list-inside px-30 space-y-2 my-6 text-gray-700"
+                  >
+                    {block.data.items.map((item: any, idx: number) => {
+                      const text = typeof item === "string" ? item : item.content || "";
+                      return <li key={idx}>{text}</li>;
+                    })}
+                  </ul>
+                );
 
-          case "image":
-            return (
-              <div key={i} className="my-12">
-                <div className="relative w-full">
-                  <Image
-                    src={block.data.file.url}
-                    alt={block.data.caption || ""}
-                    width={1920}
-                    height={1080}
-                    priority
-                    className="w-full h-auto rounded-lg object-contain"
-                  />
-                </div>
-              </div>
-            );
 
-          case "video":
-            return (
-              <div key={i} className="my-12">
-                <div className="relative w-full">
-                  <video
-                    src={block.data.url}
-                    controls
-                    muted
-                    autoPlay
-                    width={1920}
-                    height={1080}
-                    className="w-full h-auto rounded-lg object-contain"
-                  />
-                </div>
-              </div>
-            );
+              case "image":
+                return (
+                  <div key={i} className="my-12">
+                    <Image
+                      src={block.data.file.url}
+                      alt={block.data.caption || ""}
+                      width={1920}
+                      height={1080}
+                      className="w-full"
+                    />
+                  </div>
+                );
 
-          case "link":
-            if (!block.data?.url) return null;
-            return (
-              <p key={i}>
-                <Link
-                  href={block.data.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-600 underline hover:text-blue-800"
-                >
-                  {block.data.url}
-                </Link>
-              </p>
-            );
-
-          case "embed":
-            return (
-              <div key={i} className="relative w-full my-20">
-                <iframe
-                  src={block.data.embed}
-                  width={block.data.width}
-                  height={block.data.height}
-                  allow="autoplay"
-                  className="w-full h-[300px] md:h-screen  rounded-lg object-contain"
-                ></iframe>
-              </div>
-            );
-
-          default:
-            return null;
-        }
-      })}
+              default:
+                return null;
+            }
+          })}
+        </div>
+      </div>
     </div>
   );
 };

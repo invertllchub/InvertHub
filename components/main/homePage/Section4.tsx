@@ -54,6 +54,7 @@ function Section4() {
                 sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover"
                 loading="lazy"
+                unoptimized
               />
             </div>
             <div

@@ -1,26 +1,22 @@
-// import Image from "next/image";
+import Image from "next/image";
 import Link from "next/link";
 // types
 import { Article } from "@/types/articles";
+import formatDate from "@/utils/FormatDate";
 
 const ArticleCard: React.FC<{ article: Article }> = ({ article }) => {
 
-  const blocks = Array.isArray(article.blocks) ? article.blocks : [];
+  const header = article.title || "Not Title"
 
-  const headerBlock = blocks.find((b) => b.type === "header");
-  const header = headerBlock?.data?.text || "No title";
+  const image = article.coverImageUrl || "";
 
-  // const imageBlock = blocks.find((b) => b.type === "image");
-  // const image = imageBlock?.data?.file?.url;
-
-  const overviewBlock = blocks.find((b) => b.type === "overview");
-  const paragraph = overviewBlock?.data?.text || "";
+  const subTitle = article.subTitle || 'No Sub Title'
 
 
 
   return (
     <article className="group min-h-[300px] bg-white rounded-lg overflow-hidden border border-gray-100 hover:border-gray-300 transition-all duration-300">
-      {/* {image && (
+      {image && (
         <div className="relative h-60 overflow-hidden">
           <Image
             src={image}
@@ -29,15 +25,11 @@ const ArticleCard: React.FC<{ article: Article }> = ({ article }) => {
             className="object-cover transition-transform duration-500 group-hover:scale-105"
           />
         </div>
-      )} */}
+      )}
 
       <div className="p-6">
         <time className="text-sm text-gray-500 mb-3 block">
-          {new Date(article.time).toLocaleDateString("en-US", {
-            year: "numeric",
-            month: "short",
-            day: "numeric",
-          })}
+          {formatDate(article.publicationDate)}
         </time>
 
         <h2 className="text-lg font-bold text-gray-900 mb-2 leading-snug group-hover:text-gray-700 transition-colors">
@@ -45,11 +37,11 @@ const ArticleCard: React.FC<{ article: Article }> = ({ article }) => {
         </h2>
 
         <p className="text-gray-600 mb-3 line-clamp-3 font-light">
-          {paragraph}
+          {subTitle}
         </p>
 
         <Link
-          href={`/news/${article.id}`}
+          href={`/news/${article.slug}`}
           className="font-medium text-gray-900 hover:text-gray-700 transition-colors flex items-center gap-1 mt-4"
         >
           Read More

@@ -1,50 +1,47 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useState, useMemo } from "react";
+import { useState, useEffect } from "react";
 // Components
 const ToolBar = dynamic(() => import("@/components/dashboard/ToolBar"));
 const MobileCard = dynamic(() => import("@/components/dashboard/MobileCard"));
+const Pagination = dynamic(() => import("@/components/dashboard/Pagination"));
 const Table = dynamic(() => import("@/components/dashboard/Table"), {
   ssr: false,
 }) as typeof import("@/components/dashboard/Table").default;
 // React Query
-import useGetArticles from "@/hooks/articles/useGetArticles";
+import useGetArticlesWithPagination, { fetchArticles } from "@/hooks/articles/useGetArticlesWithPagination";
+import { useQueryClient } from "@tanstack/react-query";
 // Types
 import { Article } from "@/types/articles";
-import formatDate from "@/utils/FormatDate";
+// Loading & Error State
+import ErrorState from "@/components/states/ErrorState";
+import IsLoadingState from "@/components/states/IsLoadingState";
+// Debounce
+import useDebounce from "@/hooks/useDebounce";
+
 
 function Page() {
-  const { data: articles = [] } = useGetArticles();
+  const queryClient = useQueryClient();
+
   const [searchValue, setSearchValue] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
 
+  const debouncedSearchValue = useDebounce(searchValue, 2000);
+  const { data, isLoading, isError } = useGetArticlesWithPagination(currentPage, 6, debouncedSearchValue);
 
-  const filteredArticles = useMemo(() => {
-    if (!articles.length) return [];
-    const search = searchValue.toLowerCase();
+  const articles = data?.data?.data || [];
+  const totalPages = data?.data?.pagination?.totalPages ?? 1;
 
-    return articles
-      .map((article) => {
-        const titleBlock = article.blocks.find((b) => b.type === "header");
-        const title = titleBlock?.data.text || "Untitled";
-        const date = formatDate(String(article.time));
+  useEffect(() => {
+    const nextPage = currentPage + 1;
+    if (nextPage > 2) return;
+    queryClient.prefetchQuery({
+      queryKey: ["articles", nextPage, searchValue],
+      queryFn: () => fetchArticles(nextPage, 6, searchValue),
+    })
+  }, [currentPage, queryClient])
 
-        return {
-          ...article,
-          title,
-          date,
-        };
-      })
-      .filter((article) => {
-        if (!searchValue) return true;
-        const author = article.author?.toLowerCase() || "";
-        return (
-          article.title.toLowerCase().includes(search) ||
-          author.includes(search) ||
-          article.date.toLowerCase().includes(search)
-        );
-      });
-  }, [articles, searchValue]);
 
   const columns = [
     { key: "title", label: "Title" },
@@ -52,15 +49,33 @@ function Page() {
     { key: "date", label: "Date", width: "200px" },
   ];
 
+
+  if (isError) {
+    return (
+      <div className="ml-50 flex justify-center items-center h-screen">
+        <ErrorState />
+      </div>
+    );
+  }
+
+  if (isLoading) {
+    return (
+      <div className="ml-50 flex justify-center items-center h-screen">
+        <IsLoadingState />
+      </div>
+    );
+  }
+
+
   return (
     <div className="pt-22 md:pt-12 md:ml-50 p-6 md:p-12 min-h-screen bg-[#D6F4ED] overflow-hidden">
       <ToolBar title="articles" setSearchValue={setSearchValue} />
 
       {/* TABLE VIEW (Desktop) */}
       <div className="hidden md:block w-full mt-8 overflow-x-auto">
-        <Table<Article & { title: string; date: string }>
+        <Table<Article>
           page="articles"
-          data={filteredArticles}
+          data={articles}
           columns={columns}
         />
       </div>
@@ -69,10 +84,20 @@ function Page() {
       <div className="block md:hidden mt-6  space-y-4">
         <MobileCard
           page="articles"
+          data={articles}
           columns={columns}
-          data={filteredArticles}
         />
       </div>
+
+      {/* PAGINATION */}
+      <div className="mt-6 flex justify-center">
+        <Pagination
+          pageCount={totalPages}
+          onPageChange={(page) => setCurrentPage(page + 1)}
+          forcePage={currentPage - 1}
+        />
+      </div>
+      
     </div>
   );
 }

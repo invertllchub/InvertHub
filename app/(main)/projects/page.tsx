@@ -8,18 +8,18 @@ const ProjectCard = dynamic(
   () => import("@/components/main/projectPage/ProjectCard"),
   {
     ssr: false,
-    loading: () => <p>Loading...</p>,
+    loading: () => <LoadingSpinner />,
   }
 );
 
 // React Query Hook
 import useGetProjects from "@/hooks/projects/useGetProjects";
+// Components
+import LoadingSpinner from "@/components/states/LoadingSpinner";
 
 function Page() {
   const {data} = useGetProjects();
   const projects = data?.data?.data || [];
-
-  console.log(projects)
 
   return (
     <div className="w-full min-h-screen py-12 mt-20">

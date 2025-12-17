@@ -1,9 +1,6 @@
 "use client";
 
 import { useParams } from "next/navigation";
-import Link from "next/link";
-// Icons
-import { Pencil } from "lucide-react";
 // Cokkies
 import Cookies from "js-cookie";
 // React Query & Hooks
@@ -29,7 +26,7 @@ export default function JobCard() {
         enabled: jobID !== "",  
     });
 
-        if (isError) {
+    if (isError) {
         return (
             <div className="ml-50 flex justify-center items-center h-screen">
                 <ErrorState />

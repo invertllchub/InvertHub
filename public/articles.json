@@ -1,93 +1,60 @@
  [
 {
+  "title": "The Art of Margherita Pizza",
+  "slug": "the-art-of-mrgherita-pizza",
+  "subTitle": "A guide to perfecting Italy's classic pizza",
+  "description": "Learn how to make authentic Margherita pizza with fresh ingredients, traditional techniques, and beautiful presentation.",
+  "cover": "https://res.cloudinary.com/dyfregti9/image/upload/v1759593333/Carrier-01_iyur94_pxzisq.webp",
   "author": "Mohamed",
-  "time": 1694967890123,
+  "PublicationDate": "2025-12-15",
   "id": "1",
   "blocks": [
     {
-      "type": "header",
-      "data": { "text": "The Rise of the Hybrid Creative: Why Designers Need to Think Like Technologists", "level": 2 }
-    },
-    {
-      "type": "overview",
+      "type": "paragraph",
       "data": {
-        "text": "A decade ago, the creative world was divided neatly. Designers designed, coders coded, and entrepreneurs ran the show. Each field had its territory and language. But in today’s world, these boundaries have melted into one vast, connected ecosystem. The result is a new species of professional — the hybrid creative."
+        "text": "Margherita pizza is more than just a recipe — it is a cultural symbol rooted deeply in Italian tradition. Its simplicity is what makes it powerful, combining just a few ingredients to create something timeless."
       }
     },
     {
       "type": "paragraph",
       "data": {
-        "text": "Hybrid creatives don’t just think in colors and shapes; they think in systems, logic, and outcomes. They merge imagination with automation, beauty with functionality, and emotion with engineering. They understand that creativity no longer lives in isolation — it thrives in collaboration with technology."
+        "text": "The secret behind a perfect Margherita lies in respecting each ingredient. From ripe San Marzano tomatoes to fresh mozzarella and fragrant basil, every element plays a critical role in the final experience."
       }
     },
     {
-      "type": "paragraph",
+      "type": "image",
       "data": {
-        "text": "This evolution didn’t happen overnight. It was born from necessity. When the pandemic hit, global workflows shifted. The creative industries went remote, digital tools became extensions of our hands, and suddenly, being “just a designer” wasn’t enough. The ones who thrived were those who could code their own ideas, automate their marketing, build systems, and lead across disciplines."
-      }
-    },
-    {
-      "type": "paragraph",
-      "data": {
-        "text": "We’re now living in an age where the most valuable creative minds are not those who design for technology but those who design with it."
-      }
-    },
-    {
-      "type": "paragraph",
-      "data": {
-        "text": "Once, creative mastery was defined by specialization. Architects focused on blueprints. Designers focused on visuals. Copywriters focused on words. But now, single-skill creativity has become a trap — a form of professional fragility."
-      }
-    },
-    {
-      "type": "paragraph",
-      "data": {
-        "text": "The market no longer rewards the person who can “just design” — it rewards the one who can connect the dots: design, automate, analyze, and scale. The hybrid creative is not just multi-talented; they’re multi-dimensional. They see creative work as a system, not a set of tasks."
-      }
-    },
-    {
-      "type": "paragraph",
-      "data": {
-        "text": "Think of it like an orchestra. In the past, the designer was a violinist — skilled, beautiful, but dependent on the conductor. Today’s hybrid creative is the conductor, composer, and producer all at once. They design the sound, code the instruments, and automate the stage lighting."
-      }
-    },
-    {
-      "type": "paragraph",
-      "data": {
-        "text": "This shift isn’t killing creativity; it’s liberating it. It’s turning creative professionals into creative entrepreneurs."
-      }
-    },
-    {
-      "type": "paragraph",
-      "data": {
-        "text": "Architecture offers a powerful metaphor for this transformation. Decades ago, architects drew by hand. Every line was deliberate, every revision expensive. Then came CAD. Later, BIM. Now, AI and parametric tools like Grasshopper, Rhino, and Revit scripts have turned architecture into a computational practice."
-      }
-    },
-    {
-      "type": "paragraph",
-      "data": {
-        "text": "What changed wasn’t just the toolset — it was the mindset. Architects no longer think in static drawings; they think in rules, parameters, and systems."
-      }
-    },
-    {
-      "type": "paragraph",
-      "data": {
-        "text": "The same evolution is now hitting every creative industry. A motion designer writes expressions in After Effects. A brand strategist builds automation flows in Notion. A photographer uses AI to create hybrid compositions that would take days by hand."
-      }
-    },
-    {
-      "type": "paragraph",
-      "data": {
-        "text": "The principle is the same: creative intelligence now includes technical literacy. The future belongs to those who can translate emotion into code."
+        "file": {
+          "url": "https://res.cloudinary.com/dyfregti9/image/upload/v1759763092/About_sec2_fol6dh.webp"
+        },
+        "caption": "A traditional wood-fired oven brings authentic flavor to Margherita pizza"
       }
     },
     {
       "type": "header",
-      "data": { "text": "The Modern Creative Toolkit", "level": 3 }
+      "data": {
+        "text": "Margherita pizza is more than just a recipe."
+      }
     },
     {
       "type": "paragraph",
       "data": {
-        "text": "In 2025, the creative toolkit looks dramatically different from just five years ago. Photoshop and Illustrator are no longer enough. Today’s creative stack includes:"
+        "text": "In the end, Margherita pizza teaches an important lesson: mastery comes from restraint. When each component is treated with care, the result speaks for itself — honest, balanced, and unforgettable."
+      }
+    },
+    {
+      "type": "paragraph",
+      "data": {
+        "text": "The dough itself is a craft. Long fermentation times develop flavor and texture, resulting in a light, airy crust with just the right amount of chew. Rushing this step is the most common mistake beginners make.The dough itself is a craft. Long fermentation times develop flavor and texture, resulting in a light, airy crust with just the right amount of chew. Rushing this step is the most common mistake beginners make."
+      }
+    },
+    {
+      "type": "image",
+      "data": {
+        "file": {
+          "url": "https://res.cloudinary.com/dyfregti9/image/upload/v1759763092/About_sec2_fol6dh.webp"
+        },
+        "caption": "The finished Margherita pizza, simple and elegant"
       }
     },
     {
@@ -95,228 +62,22 @@
       "data": {
         "style": "unordered",
         "items": [
-          "AI design tools (Midjourney, DALL·E, Runway)",
-          "Automation platforms (Zapier, Make, n8n)",
-          "Data & analytics dashboards",
-          "CRM systems and website builders",
-          "Backend frameworks like .NET, Node.js, or Next.js",
-          "Project management tools like Notion or ClickUp"
+          "Use high-protein flour for better structure",
+          "Allow the dough to ferment slowly",
+          "Avoid overloading the pizza with toppings",
+          "Bake at the highest temperature possible"
         ]
       }
     },
     {
       "type": "paragraph",
       "data": {
-        "text": "These aren’t “extra” tools — they’re the new creative environment. Learning them isn’t a burden; it’s the new literacy. The hybrid creative understands that design is no longer about “how it looks” but how it works — and how it scales."
-      }
-    },
-    {
-      "type": "paragraph",
-      "data": {
-        "text": "Imagine a graphic designer who can code a website, automate the lead generation for a client, and measure campaign ROI — that’s not just design, that’s power."
-      }
-    },
-    {
-      "type": "paragraph",
-      "data": {
-        "text": "AI is not a replacement for creativity — it’s an amplifier. The difference lies in who uses it and how. Hybrid creatives don’t fear AI; they train it, customize it, and collaborate with it."
-      }
-    },
-    {
-      "type": "paragraph",
-      "data": {
-        "text": "Generative tools like Midjourney and ChatGPT have shifted from novelty to necessity. They allow designers to iterate faster, explore more directions, and prototype entire concepts in minutes. But what makes the hybrid creative unique is their ability to direct AI with clarity."
-      }
-    },
-    {
-      "type": "paragraph",
-      "data": {
-        "text": "Prompting isn’t typing — it’s designing with language. It’s coding emotion into instructions."
-      }
-    },
-    {
-      "type": "paragraph",
-      "data": {
-        "text": "As AI gets smarter, the gap between creative direction and technical execution will shrink. Those who understand both sides — art and logic — will lead the transformation."
-      }
-    },
-    {
-      "type": "paragraph",
-      "data": {
-        "text": "Creativity without systems is chaos. The tragedy is that most talented creatives stay small not because of lack of skill but because of lack of structure."
-      }
-    },
-    {
-      "type": "paragraph",
-      "data": {
-        "text": "They operate in survival mode — chasing projects, juggling tasks, reinventing every process from scratch. But the hybrid creative understands something deeper: freedom comes from systemization."
-      }
-    },
-    {
-      "type": "list",
-      "data": {
-        "style": "unordered",
-        "items": [
-          "Client onboarding and communication",
-          "Automated marketing and outreach",
-          "Project delivery pipelines",
-          "Financial forecasting and reporting",
-          "Data-driven feedback loops"
-        ]
-      }
-    },
-    {
-      "type": "paragraph",
-      "data": {
-        "text": "This is where the line between business and design disappears. A great system is a design — one that operates in logic instead of visuals."
-      }
-    },
-    {
-      "type": "paragraph",
-      "data": {
-        "text": "To think like a technologist doesn’t mean becoming a developer. It means thinking in logic, not only intuition. It means designing experiences that can adapt, scale, and integrate."
-      }
-    },
-    {
-      "type": "paragraph",
-      "data": {
-        "text": "The modern creative understands how APIs communicate, how databases store meaning, and how automation links one idea to another. They can read code the way an artist reads color."
-      }
-    },
-    {
-      "type": "paragraph",
-      "data": {
-        "text": "For example, using .NET for backend automation in a design or architecture workflow can save hundreds of hours. Integrating ERP systems, CRMs, and AI assistants isn’t technical drudgery — it’s design thinking applied to systems."
-      }
-    },
-    {
-      "type": "paragraph",
-      "data": {
-        "text": "We’re entering a time when knowing how things connect is more important than knowing how they look. Connection is the new craft."
-      }
-    },
-    {
-      "type": "paragraph",
-      "data": {
-        "text": "A small design studio in Copenhagen integrated AI-assisted rendering, a .NET-based project dashboard, and automated client updates. The result? 40% reduction in admin time, 3x more project capacity, and clients describing their process as “magical”."
-      }
-    },
-    {
-      "type": "paragraph",
-      "data": {
-        "text": "A visual designer in Berlin turned her teaching material into a scalable online academy using automated email flows, course platforms, and analytics dashboards. Her business now runs while she sleeps."
-      }
-    },
-    {
-      "type": "paragraph",
-      "data": {
-        "text": "A Middle Eastern architect combined parametric tools with custom .NET integrations to create responsive design templates for developers — transforming his design logic into a product."
-      }
-    },
-    {
-      "type": "paragraph",
-      "data": {
-        "text": "These examples prove a simple truth: creative power multiplies when connected with systems."
-      }
-    },
-    {
-      "type": "paragraph",
-      "data": {
-        "text": "Formal education hasn’t caught up. Most universities still teach in silos: design departments separate from tech, business isolated from art. Yet, the world outside those walls demands synthesis."
-      }
-    },
-    {
-      "type": "paragraph",
-      "data": {
-        "text": "The hybrid creative is self-taught, interdisciplinary, and constantly learning. They attend online courses, experiment with AI, collaborate across fields. They treat learning like a design sprint — fast, iterative, and applied."
-      }
-    },
-    {
-      "type": "paragraph",
-      "data": {
-        "text": "Ironically, the more technological the world becomes, the more valuable human sensitivity grows. The hybrid creative understands that emotional intelligence is the one skill AI can’t replicate."
-      }
-    },
-    {
-      "type": "paragraph",
-      "data": {
-        "text": "Technology can analyze behavior, but it can’t feel intention. The hybrid creative’s job is to translate that human essence into digital systems — to make tech more human, not the other way around."
-      }
-    },
-    {
-      "type": "paragraph",
-      "data": {
-        "text": "Great automation doesn’t remove emotion; it scales empathy. Every automated message, every interface, every workflow still needs soul."
-      }
-    },
-    {
-      "type": "paragraph",
-      "data": {
-        "text": "Hybrid creatives are not limited by geography. With remote teams, cloud tools, and international clients, they operate in a borderless market. Their portfolios are global, their systems multilingual, their ideas universal."
-      }
-    },
-    {
-      "type": "paragraph",
-      "data": {
-        "text": "A project in Dubai can be managed from Berlin with developers in India and clients in New York — all seamlessly connected through shared systems."
-      }
-    },
-    {
-      "type": "paragraph",
-      "data": {
-        "text": "This decentralization is the new creative freedom: your value is not where you are but how well you connect."
-      }
-    },
-    {
-      "type": "paragraph",
-      "data": {
-        "text": "Becoming a hybrid creative isn’t about learning every tool. It’s about developing systems thinking as your new creative philosophy."
-      }
-    },
-    {
-      "type": "list",
-      "data": {
-        "style": "unordered",
-        "items": [
-          "Can your process be automated without losing soul?",
-          "Can your ideas scale beyond your hands?",
-          "Can your creativity run even when you rest?"
-        ]
-      }
-    },
-    {
-      "type": "paragraph",
-      "data": {
-        "text": "That’s the real definition of a modern creator — someone who doesn’t just build things, but builds ways of building."
-      }
-    },
-    {
-      "type": "paragraph",
-      "data": {
-        "text": "The hybrid creative is not the future — they are the present. The rest of the world is simply catching up."
-      }
-    },
-    {
-      "type": "paragraph",
-      "data": {
-        "text": "The world no longer needs more designers or technologists. It needs translators — people who can connect art and data, beauty and systems, creativity and intelligence."
-      }
-    },
-    {
-      "type": "paragraph",
-      "data": {
-        "text": "The rise of the hybrid creative isn’t a trend; it’s a paradigm shift. Those who embrace it will not only survive — they’ll define the language of the next decade."
-      }
-    },
-    {
-      "type": "paragraph",
-      "data": {
-        "text": "So the real question isn’t whether designers should think like technologists. It’s this: can you afford not to?"
+        "text": "The dough itself is a craft. Long fermentation times develop flavor and texture, resulting in a light, airy crust with just the right amount of chew. Rushing this step is the most common mistake beginners make.The dough itself is a craft. Long fermentation times develop flavor and texture, resulting in a light, airy crust with just the right amount of chew. Rushing this step is the most common mistake beginners make."
       }
     }
-  ],
-  "version": "2.29.1"
+  ]
 },
+
 {
   "author": "Mohamed",
       "time": 1694967890123,

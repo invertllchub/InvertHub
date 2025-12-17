@@ -25,7 +25,6 @@ function page() {
     const { mutate } = useDeleteProject();
     const params = useParams();
     const ProjectID = params.id as string;
-
     const { data: project, isLoading, isError } = useGetProject(ProjectID, {
         enabled: ProjectID !== "",
     });
@@ -49,40 +48,41 @@ function page() {
         <div className="bg-(--secondary) p-4 pt-20 md:p-14 ml-0 md:ml-50 min-h-screen md:h-screen">
             <div className="bg-white rounded-3xl shadow-lg p-6 h-full flex flex-col justify-between gap-6">
 
-            <div className="flex justify-between items-start gap-4">
-                    <Link 
-                    href={project?.link || "#"}
-                    target="_blanck"
-                    className="text-2xl font-bold text-gray-800"
-                        >{project?.name}
-                    </Link>
-                <div className="flex items-center gap-4">
-                {project &&
-                    <EditBtn 
-                    page="projects"
-                    id={project?.id}
-                    details="project-details"
-                    />
-                }
-                {role === "Admin" && 
-                    <div>
-                    {project && 
-                        <DeleteBtn 
-                        item="Project" 
-                        id={project.id}
-                        deleteFn={mutate}
+                <div className="flex justify-between items-start gap-4">
+                        <Link 
+                        href={project?.link || "#"}
+                        target="_blanck"
+                        className="text-2xl font-bold text-gray-800"
+                            >{project?.name}
+                        </Link>
+                    <div className="flex items-center gap-4">
+                    {project &&
+                        <EditBtn 
+                        page="projects"
+                        id={project?.id}
+                        details="project-details"
                         />
                     }
+                    {role === "Admin" && 
+                        <div>
+                        {project && 
+                            <DeleteBtn 
+                            item="Project" 
+                            id={project.id}
+                            deleteFn={mutate}
+                            />
+                        }
+                        </div>
+                    }
                     </div>
-                }
                 </div>
-            </div>
 
                 <div className="relative w-full h-60 md:h-80 rounded-2xl overflow-hidden">
                     <Image
                     src={project?.imageUrl || defaultProjectImage}
                     alt={project?.name || ""}
                     fill
+                    unoptimized
                     className="object-cover"
                     />
                 </div>

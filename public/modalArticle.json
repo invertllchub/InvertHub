@@ -1,0 +1,45 @@
+[
+    {
+  "title": "The Art of Margherita Pizza",
+  "subTitle": "A guide to perfecting Italy's classic pizza",
+  "description": "Learn how to make authentic Margherita pizza with fresh ingredients, traditional techniques, and beautiful presentation.",
+  "cover": "https://res.cloudinary.com/demo/image/upload/v1765673860/INVERT-HUB/margherita_pizza_cover.jpg",
+  "PublicationDate": "2025-12-15",
+  "author": "Mohamed",
+  "blocks": [
+    {
+      "id": "b1a2c3d4",
+      "type": "header",
+      "data": {
+        "text": "Introduction",
+        "level": 2
+      }
+    },
+    {
+      "id": "e5f6g7h8",
+      "type": "paragraph",
+      "data": {
+        "text": "Margherita pizza is a simple yet delicious Italian classic. The key is using fresh ingredients and baking it at high heat."
+      }
+    },
+    {
+      "id": "i9j0k1l2",
+      "type": "image",
+      "data": {
+        "file": {
+          "url": "https://res.cloudinary.com/demo/image/upload/v1765673860/INVERT-HUB/margherita_slice.jpg"
+        },
+        "caption": "Fresh Margherita slice ready to serve"
+      }
+    },
+    {
+      "id": "m3n4o5p6",
+      "type": "paragraph",
+      "data": {
+        "text": "Use high-quality mozzarella, ripe tomatoes, and fresh basil. Roll out the dough evenly and bake in a preheated oven at 250°C for 7-10 minutes."
+      }
+    }
+  ]
+}
+
+]

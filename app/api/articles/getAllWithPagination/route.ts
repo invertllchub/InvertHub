@@ -1,22 +1,24 @@
-import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
+import { cookies } from "next/headers";
 
-export async function POST(req: NextRequest) {
+
+export async function GET(req: NextRequest) {
   try {
-    const body = await req.json();
     const cookieStore = await cookies();
     const token = cookieStore.get("token")?.value;
     const url = process.env.BACKEND_URL;
 
-    const res = await fetch(`${url}api/Articles`, {
-      method: "POST",
-      headers: {
-        "Authorization": token || "",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(body),
-    });
+    const pageNumber = req.nextUrl.searchParams.get("pageNumber") 
+    const pageSize = req.nextUrl.searchParams.get("pageSize") 
+    const searchValue = req.nextUrl.searchParams.get("SearchPram") 
 
+
+    const res = await fetch(`${url}api/Articles?SearchPram=${searchValue}&pageNumber=${pageNumber}&pageSize=${pageSize}`, {
+      method: "GET",
+      headers: {
+        "Authorization": `${token}`,
+      },
+    });
 
     const result = await res.json();
 

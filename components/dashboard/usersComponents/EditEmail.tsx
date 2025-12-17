@@ -38,7 +38,6 @@ export default function EditEmail({ user }: { user: User }) {
     };
 
 
-
     mutate(payload, {
       onSuccess: () => {
         showToast("success", {

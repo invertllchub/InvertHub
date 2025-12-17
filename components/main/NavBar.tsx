@@ -6,15 +6,17 @@ import Link from "next/link";
 // Components
 const Logo = dynamic(() => import("./Logo"), {
   ssr: false,
-  loading: () => <p>Loading...</p>, 
+    loading: () => (
+    <div className="flex items-center justify-center">
+      <span className="h-6 w-6 animate-spin rounded-full border-2 border-gray-300 border-t-gray-800" />
+    </div>
+  ),
 });
 const SideBarNav = dynamic(() => import("./SideBarNav"), {
   ssr: false,
-  loading: () => <p>Loading...</p>, 
 });
 const SearchIcon = dynamic(() => import("./Search-Icon"), {
   ssr: false,
-  loading: () => <p>Loading...</p>, 
 });
 
 

@@ -6,7 +6,8 @@ import { useEffect, useState } from "react";
 const ToolBar = dynamic(() => import("@/components/dashboard/ToolBar"));
 const MobileCard = dynamic(() => import("@/components/dashboard/MobileCard"));
 const Pagination = dynamic(() => import("@/components/dashboard/Pagination"));
-const Table = dynamic(() => import("@/components/dashboard/Table"), { ssr: false }) as typeof import("@/components/dashboard/Table").default;
+const Table = dynamic(() => import("@/components/dashboard/Table"), 
+{ ssr: false }) as typeof import("@/components/dashboard/Table").default;
 // Hooks
 import { fetchUsers } from "@/hooks/users/useGetUsers";
 import { useQueryClient } from "@tanstack/react-query";

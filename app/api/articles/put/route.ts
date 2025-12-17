@@ -4,16 +4,16 @@ import { NextRequest, NextResponse } from "next/server";
 export async function PUT(req: NextRequest) {
   try {
     const body = await req.json();
-    const ArticleId = body.get("id")?.toString();
+    const articleID = body.id;
     const cookieStore = await cookies();
     const token = cookieStore.get("token")?.value;
     const url = process.env.BACKEND_URL;
 
-    const res = await fetch(`${url}api/articles/edit?id=${ArticleId}`, {
+    const res = await fetch(`${url}api/Articles/${articleID}`, {
       method: "PUT",
-      headers: { 
+      headers: {
+        "Authorization": token || "",
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}` 
       },
       body: JSON.stringify(body),
     });
@@ -22,7 +22,7 @@ export async function PUT(req: NextRequest) {
 
     if (!res.ok) {
       return NextResponse.json(
-        { success: false, message: result.message || "Backend error" },
+        { success: false, message: result.message},
         { status: 400 }
       );
     }

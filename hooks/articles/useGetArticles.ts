@@ -1,20 +1,39 @@
-// React Query
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
-// Types
 import { Article } from "@/types/articles";
 
 
-const fetchArticle = async (): Promise<Article[]> => {
-    const res = await fetch('/api/articles/get');
-    const result = await res.json()
+export interface PaginationInfo {
+    pageNumber: number;
+    pageSize: number;
+    totalCount: number;
+    totalPages: number;
+    hasPreviousPage: boolean;
+    hasNextPage: boolean;
+}
 
-    return result ?? []
+export interface ArticleResponse {
+    success: boolean;
+    message: string;
+    errors: any;
+    data: {
+        data: Article[];
+        pagination: PaginationInfo;
+    };
+}
+
+const fetchArticles = async (): Promise<ArticleResponse> => {
+  const res = await fetch(`/api/articles/getAll`);
+  const json = await res.json();
+
+  if (!res.ok) throw new Error(json.message);
+
+  return json;
 };
 
-export default function useGetArticles (): UseQueryResult<Article[]> {
-    return useQuery({
+export default function useGetProjects(): UseQueryResult<ArticleResponse, Error> {
+    return useQuery<ArticleResponse, Error>({
         queryKey: ["articles"],
-        queryFn: fetchArticle,
-        staleTime: 1000 * 60 * 5
-    })
+        queryFn: () => fetchArticles(),
+        staleTime: 1000 * 60 * 5,
+    });
 }

@@ -12,14 +12,12 @@ export default function JobSection({
       </h3>
 
       <ul className="space-y-2 list-disc list-inside text-sm text-gray-600">
-
         {items
           ? Object.values(items).map((item, index) => (
               <li key={index}>{item}</li>
             ))
           : <li className="italic text-gray-400">No data</li>
         }
-
       </ul>
     </div>
   );

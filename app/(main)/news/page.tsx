@@ -1,14 +1,22 @@
 "use client";
 
+import dynamic from "next/dynamic";
 // components
 import NewsHeader from "@/components/main/NewsPage/NewsHeader";
-import ArticleCard from "@/components/main/NewsPage/ArticleCard";
+import LoadingSpinner from "@/components/states/LoadingSpinner";
+const ArticleCard = dynamic(
+  () => import("@/components/main/NewsPage/ArticleCard"),
+  {
+    loading: () => <LoadingSpinner />,
+  }
+);
 import SubscribeForm from "@/components/main/NewsPage/SubscribeForm";
 // React Query
 import useGetArticles from "@/hooks/articles/useGetArticles";
 
 export default function NewsPage() {
-  const { data: articles = [] } = useGetArticles();
+  const {data} = useGetArticles();
+  const articles = data?.data?.data || [];
 
   return (
     <div className="w-full min-h-screen bg-white py-12 mt-20">
@@ -16,7 +24,7 @@ export default function NewsPage() {
         <NewsHeader />
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 my-20">
-          {articles.map((article, i) => (
+          {articles?.map((article, i) => (
             <div key={i}>
               <ArticleCard key={article.id} article={article} />
             </div>
