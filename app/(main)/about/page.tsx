@@ -1,13 +1,12 @@
 "use client";
 
+import LoadingSpinner from "@/components/states/LoadingSpinner";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 
 const ImageBlock = dynamic(() => import('@/components/main/ImageBlock'), {
     loading: () => (
-        <div className="flex items-center justify-center h-screen text-white">
-            Loading projects...
-        </div>
+      <LoadingSpinner />
     )
 })
 export default function AboutPage() {

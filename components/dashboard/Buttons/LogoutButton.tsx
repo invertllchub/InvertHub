@@ -15,7 +15,7 @@ export default function LogoutButton({ id }: { id?: string }) {
         });
         mutate(undefined, {
             onSuccess: () => {
-            router.push("/dashboard"); 
+            router.push("/Login"); 
             showToast("success", {
                 message: "Logout Successfuly!",
                 toastId,

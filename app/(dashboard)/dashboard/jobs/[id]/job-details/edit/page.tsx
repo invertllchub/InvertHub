@@ -37,7 +37,7 @@ function Page() {
 
   if (isError) {
     return (
-      <div className="ml-50 flex justify-center items-center h-screen">
+      <div className="ml-0 md:ml-50 flex justify-center items-center h-screen">
         <ErrorState />
       </div>
     );
@@ -45,7 +45,7 @@ function Page() {
 
   if (isLoading) {
     return (
-      <div className="ml-50 flex justify-center items-center h-screen">
+      <div className="ml-0 md:ml-50 flex justify-center items-center h-screen">
         <IsLoadingState />
       </div>
     );

@@ -41,10 +41,12 @@ const gridColumns = [...(columns.map(col => col.width || "1fr"))].filter(Boolean
         const isDisabled = (item as any).isActive === false;
         return (
         <Link
-        href={`/dashboard/${page}/${
+        href={`/dashboard/${page}/
+          ${
           page === "articles"
           ? item.slug
-          : item.id}/${
+          : item.id
+          }/${
           page === "users"
             ? "user-profile"
             : page === "jobs"
@@ -73,7 +75,8 @@ const gridColumns = [...(columns.map(col => col.width || "1fr"))].filter(Boolean
                 col.key === "lastLoginAt" 
                 || col.key === "createdAt" 
                 || col.key === "updatedAt" 
-                || col.key === "closingDate" 
+                || col.key === "closingDate"
+                || col.key === "publicationDate"  
                 ? (
                   value ? formatDate(value) : "—"
                 ) : col.key === "isActive" ? (

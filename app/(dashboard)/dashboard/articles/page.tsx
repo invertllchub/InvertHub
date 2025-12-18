@@ -44,15 +44,18 @@ function Page() {
 
 
   const columns = [
-    { key: "title", label: "Title" },
+    { key: "title", label: "Title", width: "400px" },
     { key: "author", label: "Author", width: "200px" },
-    { key: "date", label: "Date", width: "200px" },
+    { key: "publicationDate", label: "Publication Date", width: "200px" },
+    { key: "createdAt", label: "created At" },
+    { key: "updatedBy", label: "updated By" },
+    { key: "updatedAt", label: "updated At" },
   ];
 
 
   if (isError) {
     return (
-      <div className="ml-50 flex justify-center items-center h-screen">
+      <div className="ml-0 md:ml-50 flex justify-center items-center h-screen">
         <ErrorState />
       </div>
     );
@@ -60,7 +63,7 @@ function Page() {
 
   if (isLoading) {
     return (
-      <div className="ml-50 flex justify-center items-center h-screen">
+      <div className="ml-0 md:ml-50 flex justify-center items-center h-screen">
         <IsLoadingState />
       </div>
     );

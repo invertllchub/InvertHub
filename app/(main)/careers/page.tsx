@@ -1,12 +1,12 @@
 "use client";
+
+import LoadingSpinner from "@/components/states/LoadingSpinner";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 // Components
 const ImageBlock = dynamic(() => import('@/components/main/ImageBlock'), {
     loading: () => (
-        <div className="flex items-center justify-center h-screen text-white">
-            Loading projects...
-        </div>
+      <LoadingSpinner />
     )
 })
 
@@ -58,6 +58,7 @@ function Page() {
         <ImageBlock 
         alt="Careers picture"
         src="https://res.cloudinary.com/dyfregti9/image/upload/v1759329723/Carrier-02_nobuix.png"
+        priority
         />
       </section>
 

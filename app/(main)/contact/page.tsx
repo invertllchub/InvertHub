@@ -1,14 +1,16 @@
 "use client";
 
-import React from "react";
 import { IoLogoLinkedin } from "react-icons/io5";
-import { FaInstagramSquare, FaMapPin, FaPaperPlane } from "react-icons/fa";
+import { FaInstagramSquare, FaPaperPlane } from "react-icons/fa";
 
 import Link from "next/link";
 import dynamic from "next/dynamic";
+import LoadingSpinner from "@/components/states/LoadingSpinner";
 
 const ContactForm = dynamic(() => import("@/components/main/ContactPage/ContactForm"), {
-  loading: () => <p>loading...</p>,
+  loading: () => (
+    <LoadingSpinner />
+  ),
 })
 const ContactPage = () => {
   const socialMedia = [
@@ -97,8 +99,6 @@ const ContactPage = () => {
             </div>
 
           </div>
-
-
         </div>
       </div>
     </div>

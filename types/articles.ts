@@ -94,6 +94,10 @@ export interface Article {
   };
   version: string;
   seo?: ArticleSEO;
+  createdAt?: string;
+  createdBy?: string;
+  updatedAt?: string;
+  updatedBy?: string;
 }
 
 /* =========================

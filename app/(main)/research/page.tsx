@@ -1,21 +1,17 @@
 "use client"
 
+import LoadingSpinner from '@/components/states/LoadingSpinner';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
-import Image from 'next/image';
 // Components
 const ImageBlock = dynamic(() => import('@/components/main/ImageBlock'), {
     loading: () => (
-        <div className="flex items-center justify-center h-screen text-white">
-            Loading projects...
-        </div>
+        <LoadingSpinner />
     )
 })
 const YellowCard = dynamic(() => import('@/components/main/YellowCard'), {
     loading: () => (
-        <div className="flex items-center justify-center h-screen text-white">
-            Loading projects...
-        </div>
+        <LoadingSpinner />
     )
 })
 
@@ -24,19 +20,19 @@ function page() {
 
     const Blocks = [
         {
-            title: "- Systems Thinking for Creative Growth", 
+            title: "Systems Thinking for Creative Growth", 
             paragraph: "We research how to help creative professionals install repeatable, scalable systems—so they can grow their business without sacrificing their craft.", 
         },
         {
-            label: "- AI-Augmented Design & Process Optimization", 
+            label: "AI-Augmented Design & Process Optimization", 
             slug: "From image generation to prompt-based automation, we explore how AI can serve as a collaborator, not just a tool, in the design process.", 
         },
         {
-            title: "- Behavioral Branding & Identity Models", 
+            title: "Behavioral Branding & Identity Models", 
             paragraph: "We apply behavioral science and branding psychology to help creators develop powerful, emotionally resonant brand identities that convert.", 
         },
         {
-            title: "🏗️ ERP & Platform Development", 
+            title: "ERP & Platform Development", 
             paragraph: (
                 <>
                 Our cloud-based platform,{" "}
@@ -53,7 +49,7 @@ function page() {
             ),
         },
         {
-            title: "- Digital Ecosystems & E-Commerce Experiences", 
+            title: "Digital Ecosystems & E-Commerce Experiences", 
             paragraph: (
                 <>
                 With projects like,{" "}
@@ -70,7 +66,7 @@ function page() {
             ),
         },
         {
-            title: "- Creative Workflows & Prompt Engineering", 
+            title: "Creative Workflows & Prompt Engineering", 
             paragraph: "We experiment with visual language systems and AI prompt strategies to speed up ideation, prototyping, and content creation for artists, architects, and designers.", 
         },
     ]
@@ -78,7 +74,7 @@ function page() {
         <div className='w-full py-30 px-6 md:px-16 mt-12 overflow-x-hidden'>
             <section className='w-full'>
                 <h1 className='w-full text-4xl md:text-9xl font-extrabold'>RESEARCH AND INNOVATION</h1>
-                <p className='text-xl md:text-4xl font-semibold mt-6'>
+                <p className='text-lg md:text-4xl font-semibold mt-6'>
                     At INVERT, we don’t chase trends, we build what’s next.
                     We approach every project with strategic clarity, system-based thinking, 
                     and bold experimentation. Our work sits at the intersection of design, 
@@ -103,7 +99,7 @@ function page() {
             </section>
             <section className='w-full mt-20'>
                 <h1 className='w-full text-2xl md:text-4xl font-bold'>Innovation With Purpose</h1>
-                <p className='text-xl md:text-2xl font-semibold mt-6'>
+                <p className='text-lg md:text-2xl font-semibold mt-6'>
                     We believe innovation is only meaningful when it's human-centered, scalable, 
                     and deeply integrated into real-world workflows. 
                     That’s why every R&D effort at INVERT is tied to solving systemic challenges across 
@@ -118,9 +114,10 @@ function page() {
                     <li className='font-bold'>Make visionary design and strategic thinking accessible to everyone—creators, companies, individuals, and communities alike</li>
                 </ul>
             </section>
-            <section className='w-full h-screen mt-25'>
-                <div className='w-full h-full flex flex-col md:flex-row items-center gap-12 md:gap-4'>
-                    <div className='w-full md:w-6/12 h-full'>
+            <section className='w-full  mt-25'>
+                <div className='w-full grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-4'>
+                    {/* Text column */}
+                    <div className='w-full md:w-6/12 p-4 md:p-0'>
                         <h1 className='w-full text-2xl md:text-4xl font-bold mb-10'>Our Innovation Model</h1>
                         <p className='text-xl md:text-2xl font-semibold mt-6'>
                             At INVERT, R&D flows through what we call our Living Systems Model:
@@ -144,27 +141,23 @@ function page() {
                             </li>
                         </ul>
                     </div>
-                    <div className='w-full md:w-6/12 h-full'>
-                        <div  className="relative w-full h-full">
-                            <Image
-                            alt="Innovation Model"
-                            src="https://res.cloudinary.com/dyfregti9/image/upload/v1759591630/R_D_Sec3_gxaduq.png"
-                            fill
-                            className="object-cover rounded-md"
+                    <div>
+                        <ImageBlock
+                        alt="Innovation Model"
+                        src="https://res.cloudinary.com/dyfregti9/image/upload/v1759591630/R_D_Sec3_gxaduq.png"
                         />
-                        </div>
                     </div>
                 </div>
             </section>
             <section className='w-full mt-20'>
                 <h1 className='w-full text-2xl md:text-4xl font-bold'>Areas of Exploration</h1>
-                <div  className="relative w-full h-[40vh] md:h-screen mt-15">
-                    <ImageBlock 
-                    alt='Areas of Exploration'
-                    src='https://res.cloudinary.com/dyfregti9/image/upload/v1759331654/R_D_02.png_zgm3qb.png'
+                <div className="mt-10 md:mt-20">
+                    <ImageBlock
+                    alt="Areas of Exploration"
+                    src="https://res.cloudinary.com/dyfregti9/image/upload/v1759331654/R_D_02.png_zgm3qb.png"
                     />
                 </div>
-                <div className='w-full mt-15'>
+                <div className='w-full mt-8 md:mt-15'>
                     {Blocks.map((b, i) => {
                         return (
                             <div key={i} className='w-full leading-8'>
@@ -179,7 +172,7 @@ function page() {
                 <YellowCard 
                 h1={`Want to Collaborate With Us?`}
                 p={`We partner with creators, studios, and visionary companies who believe the future isn’t something to wait for—it’s something we can design.
-                👉 Let’s co-create the tools and systems that will define the next decade.`}
+                Let’s co-create the tools and systems that will define the next decade.`}
                 link={`Join Our Innovation Network`}
                 img={`https://res.cloudinary.com/dyfregti9/image/upload/v1759591630/R_D_Footer_gdzjtw.png`}
                 alt={`Innovation Network`}

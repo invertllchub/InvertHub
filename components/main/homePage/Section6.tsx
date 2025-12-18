@@ -1,12 +1,11 @@
 
 import Link from 'next/link'
 import dynamic from 'next/dynamic';
+import LoadingSpinner from '@/components/states/LoadingSpinner';
 
 const ImageBlock = dynamic(() => import('../ImageBlock'), {
   loading: () => (
-    <div className="flex items-center justify-center h-screen text-white">
-      Loading Image...
-    </div>
+    <LoadingSpinner />
   )
 })
 
@@ -28,10 +27,12 @@ function Section6() {
           FIND OUT MORE
           <span className="absolute left-0 -bottom-1 w-full h-0.5 bg-white scale-x-100 origin-left transition-transform duration-300 group-hover:scale-x-0"></span>
         </Link>
-        <ImageBlock 
-        alt='Reaserch and Innovation'
-        src='https://res.cloudinary.com/dyfregti9/image/upload/v1758050619/Home_Sec3_Research_nrz6ve.png'
-        />
+        <div className="mt-10 md:mt-20">
+          <ImageBlock 
+          alt='Reaserch and Innovation'
+          src='https://res.cloudinary.com/dyfregti9/image/upload/v1758050619/Home_Sec3_Research_nrz6ve.png'
+          />
+        </div>
       </section>
   )
 }

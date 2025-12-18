@@ -1,18 +1,15 @@
 
+import LoadingSpinner from '@/components/states/LoadingSpinner'
 import dynamic from 'next/dynamic'
 // Components
 const YellowCard = dynamic(() => import('@/components/main/YellowCard'), {
     loading: () => (
-        <div className="flex items-center justify-center h-screen text-white">
-            Loading projects...
-        </div>
+        <LoadingSpinner />
     )
 })
 const ImageBlock = dynamic(() => import('@/components/main/ImageBlock'), {
     loading: () => (
-        <div className="flex items-center justify-center h-screen text-white">
-            Loading projects...
-        </div>
+        <LoadingSpinner />
     )
 })
 
@@ -42,10 +39,12 @@ function Page() {
                     Delivering transformative design solutions across all scales and disciplines,
                     blending decades of expertise with a global reach.
                 </p>
-                <ImageBlock 
-                alt='Design picture'
-                src='https://res.cloudinary.com/dyfregti9/image/upload/v1758050583/Ourservices_Sec1_01_kjfbpn.png'
-                />
+                <div className="mt-10 md:mt-20">
+                    <ImageBlock 
+                    alt='Design picture'
+                    src='https://res.cloudinary.com/dyfregti9/image/upload/v1758050583/Ourservices_Sec1_01_kjfbpn.png'
+                    />
+                </div>
             </section>
             <section className='w-full mt-32'>
                 <h1 className='w-full text-4xl md:text-8xl font-bold'>CONSULTING</h1>
@@ -54,10 +53,12 @@ function Page() {
                     and health to guide clients to navigate and increase impact and seize upon
                     opportunities that others might overlook.
                 </p>
-                <ImageBlock 
-                alt='Consulting picture'
-                src='https://res.cloudinary.com/dyfregti9/image/upload/v1758050567/Ourservices_Sec1_02_avnr2t.png'
-                />
+                <div className="mt-10 md:mt-20">
+                    <ImageBlock 
+                    alt='Consulting picture'
+                    src='https://res.cloudinary.com/dyfregti9/image/upload/v1758050567/Ourservices_Sec1_02_avnr2t.png'
+                    />
+                </div>
             </section>
             <section className='w-full h-screen bg-white'>
                 <YellowCard

@@ -29,7 +29,7 @@ function Section4() {
     return (
       <div className="w-full min-h-screen flex justify-center items-center">
         <p className="text-xl text-red-500 font-semibold">
-          Failed to load projects 😞
+          Failed to load projects 
         </p>
       </div>
     );
@@ -64,7 +64,7 @@ function Section4() {
               <h2 className="text-sm md:text-lg font-bold mb-2">
                 {item.name}
               </h2>
-              <p className="text-2xl sm:text-5xl md:text-6xl font-bold">
+              <p className="text-xl md:text-4xl font-bold">
                 {item.description}
               </p>
               <div className="w-full h-10 flex items-center justify-between absolute bottom-0 left-0 p-6">

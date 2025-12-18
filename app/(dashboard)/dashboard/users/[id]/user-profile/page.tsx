@@ -26,19 +26,21 @@ export default function Page() {
         enabled: userID !== "",
     });
 
-    if (isError)
+    if (isError) {
         return (
-            <div className="ml-50 flex justify-center items-center h-screen">
+            <div className="ml-0 md:ml-50 flex justify-center items-center h-screen">
                 <ErrorState />
             </div>
         );
+    }
 
-    if (isLoading)
+    if (isLoading) {
         return (
-            <div className="ml-50 flex justify-center items-center h-screen">
+            <div className="ml-0 md:ml-50 flex justify-center items-center h-screen">
                 <IsLoadingState />
             </div>
         );
+    }
 
     return (
         <div className="bg-(--secondary) p-4 pt-20 md:p-14 ml-0 md:ml-50 min-h-screen md:h-screen">

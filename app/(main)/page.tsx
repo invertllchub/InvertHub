@@ -1,5 +1,6 @@
 "use client";
 
+import LoadingSpinner from "@/components/states/LoadingSpinner";
 import dynamic from "next/dynamic";
 // components
 const Section1 = dynamic(() => import('@/components/main/homePage/Section1'));
@@ -8,9 +9,7 @@ const Section3 = dynamic(() => import('@/components/main/homePage/Section3'));
 const Section4 = dynamic(() => import("@/components/main/homePage/Section4"), {
   ssr: false, 
   loading: () => (
-    <div className="flex items-center justify-center h-screen text-white">
-      Loading projects...
-    </div>
+    <LoadingSpinner />
   ),
 });
 const Section5 = dynamic(() => import('@/components/main/homePage/Section5'));

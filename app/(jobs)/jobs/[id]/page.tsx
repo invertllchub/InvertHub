@@ -1,8 +1,9 @@
 "use client";
+
+
 import { useState } from "react";
 import { useParams } from "next/navigation";
 import Image from "next/image";
-
 // Icons
 import { Hourglass, MapPin, Calendar, Clock } from "lucide-react";
 //components
@@ -34,7 +35,7 @@ function Page() {
 
   if (isError) {
     return (
-      <div className="ml-50 flex justify-center items-center h-screen">
+      <div className="ml-0 md:ml-50 flex justify-center items-center h-screen">
         <ErrorState />
       </div>
     );
@@ -42,7 +43,7 @@ function Page() {
 
   if (isLoading) {
     return (
-      <div className="ml-50 flex justify-center items-center h-screen">
+      <div className="ml-0 md:ml-50 flex justify-center items-center h-screen">
         <IsLoadingState />
       </div>
     );

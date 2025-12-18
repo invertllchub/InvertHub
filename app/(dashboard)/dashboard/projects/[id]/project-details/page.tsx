@@ -29,19 +29,21 @@ function page() {
         enabled: ProjectID !== "",
     });
 
-    if (isError)
+    if (isError) {
         return (
-            <div className="ml-50 flex justify-center items-center h-screen">
+            <div className="ml-0 md:ml-50 flex justify-center items-center h-screen">
                 <ErrorState />
             </div>
         );
+    }
 
-    if (isLoading)
+    if (isLoading) {
         return (
-            <div className="ml-50 flex justify-center items-center h-screen">
+            <div className="ml-0 md:ml-50 flex justify-center items-center h-screen">
                 <IsLoadingState />
             </div>
         );
+    }
 
 
     return (
