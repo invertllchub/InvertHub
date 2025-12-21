@@ -64,7 +64,7 @@ function Section4() {
               <h2 className="text-sm md:text-lg font-bold mb-2">
                 {item.name}
               </h2>
-              <p className="text-xl md:text-4xl font-bold">
+              <p className="text-md md:text-4xl font-bold">
                 {item.description}
               </p>
               <div className="w-full h-10 flex items-center justify-between absolute bottom-0 left-0 p-6">
