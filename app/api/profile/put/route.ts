@@ -4,7 +4,6 @@ import { cookies } from "next/headers";
 export async function PUT(req: NextRequest) {
   try {
     const body = await req.json();
-    console.log(body)
     const userId = body.id
     const url = process.env.BACKEND_URL;
     // Token
@@ -13,8 +12,6 @@ export async function PUT(req: NextRequest) {
     const role = cookieStore.get("role")?.value;
 
 
-
-    console.log(userId)
 
     if (!token) {
         console.warn("⚠️ No token found!");
@@ -36,7 +33,6 @@ export async function PUT(req: NextRequest) {
         console.error("Invalid JSON response:", text);
         result = {};
     }
-    console.log("📦 API response body:", result);
 
     if (!res.ok) {
       return NextResponse.json(

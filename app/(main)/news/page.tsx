@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic";
 // components
-import NewsHeader from "@/components/main/NewsPage/NewsHeader";
+import Header from "@/components/main/Header";
 import LoadingSpinner from "@/components/states/LoadingSpinner";
 const ArticleCard = dynamic(
   () => import("@/components/main/NewsPage/ArticleCard"),
@@ -19,9 +19,14 @@ export default function NewsPage() {
   const articles = data?.data?.data || [];
 
   return (
-    <div className="w-full min-h-screen bg-white py-12 mt-20">
-      <div className="w-11/12 mx-auto px-4 sm:px-6 lg:px-8">
-        <NewsHeader />
+    <div className='w-full py-30 px-4 md:px-20 overflow-x-hidden'>
+        <Header 
+        title="Perspectives, Publications, and Press"
+        paragraph="From international features to internal thinking, this is where we
+        document what we're doing and what we're exploring. Expect
+        insights, studio updates, opinion pieces, and the latest releases
+        from our publishing platforms."
+        />
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 my-20">
           {articles?.map((article, i) => (
@@ -48,7 +53,6 @@ export default function NewsPage() {
             — Get INVERT's perspectives delivered monthly
           </p>
         </div>
-      </div>
     </div>
   );
 }

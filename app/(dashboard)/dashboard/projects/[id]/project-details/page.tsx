@@ -79,7 +79,7 @@ function page() {
                     </div>
                 </div>
 
-                <div className="relative w-full h-60 md:h-80 rounded-2xl overflow-hidden">
+                <div className="relative w-full aspect-video rounded-2xl overflow-hidden">
                     <Image
                     src={project?.imageUrl || defaultProjectImage}
                     alt={project?.name || ""}

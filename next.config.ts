@@ -1,20 +1,15 @@
-// next.config.js
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "example.com",
+        hostname: "res.cloudinary.com",
         pathname: "/**",
       },
-      {
-        protocol: 'https',
-        hostname: 'res.cloudinary.com',
-        pathname: '/**', // يسمح لكل المسارات داخل حسابك
-      },
     ],
+    formats: ['image/webp', 'image/avif'], 
   },
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

@@ -8,7 +8,7 @@ export async function GET(req: NextRequest) {
     const token = cookieStore.get("token")?.value;
     const url = process.env.BACKEND_URL;
 
-    const res = await fetch(`${url}api/Jobs`, {
+    const res = await fetch(`${url}api/Dashboard/stats`, {
         method: "GET",
         headers: {
             "Authorization": `${token}`,
@@ -16,7 +16,7 @@ export async function GET(req: NextRequest) {
     });
 
     const result = await res.json();
-    
+
     if (!res.ok) {
         return NextResponse.json(
             { success: false, message: result.message },

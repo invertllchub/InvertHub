@@ -1,4 +1,5 @@
 
+import Header from '@/components/main/Header'
 import LoadingSpinner from '@/components/states/LoadingSpinner'
 import dynamic from 'next/dynamic'
 // Components
@@ -17,12 +18,12 @@ const ImageBlock = dynamic(() => import('@/components/main/ImageBlock'), {
 function Page() {
     return (
         <div className='w-full py-30 px-4 md:px-16'>
-            <h1 className='w-full text-4xl md:text-9xl font-extrabold'>OUR SERVICES</h1>
-            <p className='text-2xl md:text-4xl font-semibold mt-6'>
-                Our ambition knows no bounds. If building a sustainable city in space is the goal,
+            <Header 
+            title='OUR SERVICES'
+            paragraph='Our ambition knows no bounds. If building a sustainable city in space is the goal,
                 we’ll plan it, design it, and engineer it. With our expanding services and global expertise,
-                we go far beyond architecture.
-            </p>
+                we go far beyond architecture.'            
+            />
             <div className="relative w-full h-[300px] md:h-screen mt-16">
                 <video
                 src="https://res.cloudinary.com/dyfregti9/video/upload/v1758483229/services_header_yevxmx.mp4"

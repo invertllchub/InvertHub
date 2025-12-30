@@ -24,7 +24,6 @@ export async function GET(req: NextRequest) {
     });
 
     const result = await res.json();
-    console.log(result);
 
     if (!res.ok) {
         return NextResponse.json(

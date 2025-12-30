@@ -41,12 +41,7 @@ const gridColumns = [...(columns.map(col => col.width || "1fr"))].filter(Boolean
         const isDisabled = (item as any).isActive === false;
         return (
         <Link
-        href={`/dashboard/${page}/
-          ${
-          page === "articles"
-          ? item.slug
-          : item.id
-          }/${
+        href={`/dashboard/${page}/${page === "articles" ? item.slug : item.id}/${
           page === "users"
             ? "user-profile"
             : page === "jobs"

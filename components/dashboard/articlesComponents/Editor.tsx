@@ -7,6 +7,8 @@ import EditorJS from "@editorjs/editorjs";
 import Header from "@editorjs/header";
 import List from "@editorjs/list";
 import ImageTool from "@editorjs/image";
+import LinkTool from "@/utils/editorTools/LinkTool";
+import Quote from "@editorjs/quote";
 // Toast
 import { showToast } from "@/components/toast/Toast";
 // Components
@@ -20,6 +22,7 @@ import ArticleMetaForm, {ArticleSEO} from "./ArticleMetaForm";
 // Functions
 import { uploadToCloudinary } from "@/utils/CloudinaryUpload";
 import { toSlug } from "@/utils/ToSlug";
+import SubHeaderTool from "@/utils/editorTools/SubHeaderTool";
 
 export default function Editor() {
   const { mutate } = useAddArticle();
@@ -48,10 +51,10 @@ export default function Editor() {
         holder: "editorjs",
         autofocus: true,
         tools: {
-          header: {
-            class: Header,
-            inlineToolbar: true,
-          },
+          header: Header,
+          subheader: SubHeaderTool,
+          quote: Quote,
+          link: LinkTool,
           list: List,
           image: {
             class: ImageTool,
@@ -89,11 +92,6 @@ export default function Editor() {
         return;
       }
 
-      if (!outputData?.blocks?.length) {
-        showToast("error", { message: "Article content is empty" });
-        return;
-      }
-  
       const toastId = showToast("loading", {
         message: "Publishing Article...",
       });

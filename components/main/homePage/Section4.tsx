@@ -61,10 +61,10 @@ function Section4() {
               className="item_content relative flex flex-col justify-center text-center 
                 md:text-start bg-white text-[#292929] p-6 sm:p-12 sm:w-1/2 w-full h-[40vh] sm:h-full"
             >
-              <h2 className="text-sm md:text-lg font-bold mb-2">
+              <h2 className="text-gray-400 text-sm md:text-lg font-bold mb-3">
                 {item.name}
               </h2>
-              <p className="text-md md:text-4xl font-bold">
+              <p className="text-md md:text-6xl font-bold">
                 {item.description}
               </p>
               <div className="w-full h-10 flex items-center justify-between absolute bottom-0 left-0 p-6">

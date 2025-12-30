@@ -9,6 +9,32 @@
   "PublicationDate": "2025-12-15",
   "id": "1",
   "blocks": [
+      {
+      "type": "header",
+      "data": {
+        "text": "Margherita pizza is more than just a recipe."
+      }
+    },
+    {
+      "type": "subheader",
+      "data": {
+        "text": "This is sub-header of Margherita pizza is more than just a recipe."
+      }
+    },
+    {
+      "type": "link",
+      "data": {
+        "url": "https://facebook.com"
+      }
+    },
+    {
+      "type": "quote",
+      "data": {
+        "text": "Margherita pizza is more than just a recipe — it is a cultural symbol rooted deeply in Italian tradition. Its simplicity is what makes it powerful, combining just a few ingredients to create something timeless.",
+        "caption" : "caption",
+        "alignment": "left"
+      }
+    },
     {
       "type": "paragraph",
       "data": {
@@ -28,12 +54,6 @@
           "url": "https://res.cloudinary.com/dyfregti9/image/upload/v1759763092/About_sec2_fol6dh.webp"
         },
         "caption": "A traditional wood-fired oven brings authentic flavor to Margherita pizza"
-      }
-    },
-    {
-      "type": "header",
-      "data": {
-        "text": "Margherita pizza is more than just a recipe."
       }
     },
     {

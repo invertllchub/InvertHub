@@ -13,8 +13,8 @@ function Section2() {
               <p className="text-lg md:text-xl font-semibold text-gray-700 mb-10">
                 INVERT LLC merges architecture, publishing, innovation, and tech
                 into one powerhouse. We help studios, startups, and creatives
-                design better systems — from real-world environments to digital
-                business frameworks — and turn their work into scalable success.
+                design better systems from real-world environments to digital
+                business frameworks and turn their work into scalable success.
               </p>
               <Link href="/about" className="relative text-xl group">
                 ABOUT US

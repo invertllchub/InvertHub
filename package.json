@@ -13,6 +13,7 @@
     "@editorjs/header": "^2.8.8",
     "@editorjs/image": "^2.10.3",
     "@editorjs/list": "^2.0.9",
+    "@editorjs/quote": "^2.7.6",
     "@hookform/resolvers": "^5.2.2",
     "@tanstack/react-query": "^5.90.6",
     "gsap": "^3.13.0",

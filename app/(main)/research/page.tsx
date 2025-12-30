@@ -1,5 +1,6 @@
 "use client"
 
+import Header from '@/components/main/Header';
 import LoadingSpinner from '@/components/states/LoadingSpinner';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
@@ -21,7 +22,7 @@ function page() {
     const Blocks = [
         {
             title: "Systems Thinking for Creative Growth", 
-            paragraph: "We research how to help creative professionals install repeatable, scalable systems—so they can grow their business without sacrificing their craft.", 
+            paragraph: "We research how to help creative professionals install repeatable, scalable systems so they can grow their business without sacrificing their craft.", 
         },
         {
             label: "AI-Augmented Design & Process Optimization", 
@@ -44,7 +45,7 @@ function page() {
                 >
                     Akarati
                 </Link>
-                , is a smart ERP solution built for the future of real estate—integrating BIM, automation, and AI to streamline operations.
+                , is a smart ERP solution built for the future of real estate integrating BIM, automation, and AI to streamline operations.
                 </>
             ),
         },
@@ -61,7 +62,7 @@ function page() {
                 >
                     Revitesse
                 </Link>
-                , we reimagine how luxury brands can operate online—blending aesthetics, automation, and seamless user experience to create digital spaces that feel as refined as their products.
+                , we reimagine how luxury brands can operate online blending aesthetics, automation, and seamless user experience to create digital spaces that feel as refined as their products.
                 </>
             ),
         },
@@ -71,20 +72,18 @@ function page() {
         },
     ]
     return (
-        <div className='w-full py-30 px-6 md:px-16 mt-12 overflow-x-hidden'>
-            <section className='w-full'>
-                <h1 className='w-full text-4xl md:text-9xl font-extrabold'>RESEARCH AND INNOVATION</h1>
-                <p className='text-lg md:text-4xl font-semibold mt-6'>
-                    At INVERT, we don’t chase trends, we build what’s next.
+        <div className='w-full py-30 px-6 md:px-16  overflow-x-hidden'>
+            <Header 
+            title='RESEARCH AND INNOVATION'
+            paragraph='At INVERT, we don’t chase trends, we build what’s next.
                     We approach every project with strategic clarity, system-based thinking, 
                     and bold experimentation. Our work sits at the intersection of design, 
                     artificial intelligence, automation, and real-world business challenges, 
                     bridging vision with execution.
                     Research and Innovation aren’t side tracks, they are the core engine powering every 
                     initiative across INVERT: from coaching programs and digital platforms to architecture, 
-                    publishing, and scalable business systems.
-                </p>
-            </section>
+                    publishing, and scalable business systems.'
+            />
             <section>
                 <div className="relative w-full h-[300px] md:h-screen mt-16">
                     <video
@@ -98,46 +97,46 @@ function page() {
                 </div>
             </section>
             <section className='w-full mt-20'>
-                <h1 className='w-full text-2xl md:text-4xl font-bold'>Innovation With Purpose</h1>
-                <p className='text-lg md:text-2xl font-semibold mt-6'>
+                <h1 className='w-full text-2xl md:text-5xl font-bold'>Innovation With Purpose</h1>
+                <h2 className='text-lg md:text-3xl font-semibold mt-6'>
                     We believe innovation is only meaningful when it's human-centered, scalable, 
                     and deeply integrated into real-world workflows. 
                     That’s why every R&D effort at INVERT is tied to solving systemic challenges across 
-                    the industries we serve—from creative entrepreneurship to real estate tech 
+                    the industries we serve from creative entrepreneurship to real estate tech 
                     and AI-integrated design.
                     We focus on building tools, frameworks, and digital ecosystems that:
-                </p>
+                </h2>
                 <ul className="list-disc pl-6 space-y-2 text-gray-700 mt-10">
-                    <li>Help creators scale without burning out</li>
-                    <li>Bring automation and intelligence into legacy industries</li>
-                    <li>Create platforms that empower—not replace—human creativity</li>
-                    <li className='font-bold'>Make visionary design and strategic thinking accessible to everyone—creators, companies, individuals, and communities alike</li>
+                    <li className='text-lg md:text-2xl'>Help creators scale without burning out</li>
+                    <li className='text-lg md:text-2xl'>Bring automation and intelligence into legacy industries</li>
+                    <li className='text-lg md:text-2xl'>Create platforms that empower not replace human creativity</li>
+                    <li className='text-lg md:text-2xl font-bold'>Make visionary design and strategic thinking accessible to everyone creators, companies, individuals, and communities alike</li>
                 </ul>
             </section>
             <section className='w-full  mt-25'>
                 <div className='w-full grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-4'>
                     {/* Text column */}
-                    <div className='w-full md:w-6/12 p-4 md:p-0'>
+                    <div className='w-full md:w-6/12'>
                         <h1 className='w-full text-2xl md:text-4xl font-bold mb-10'>Our Innovation Model</h1>
                         <p className='text-xl md:text-2xl font-semibold mt-6'>
                             At INVERT, R&D flows through what we call our Living Systems Model:
                         </p>
                         <ul className="list-decimal pl-6 space-y-2 text-gray-700 marker:text-black marker:font-bold mt-10">
                             <li>
-                                <h3 className='text-black font-bold'>Research the real problem</h3>
-                                <p>We dig beneath the surface to uncover root causes—what’s invisible, not just what’s urgent.</p>
+                                <h3 className='text-xl md:text-2xl text-black font-bold'>Research the real problem</h3>
+                                <p className='text-md md:text-lg mt-1'>We dig beneath the surface to uncover root causes what’s invisible, not just what’s urgent.</p>
                             </li>
                             <li>
-                                <h3 className='text-black font-bold'>Prototype solutions</h3>
-                                <p>We create agile, scalable systems—from AI-powered tools and design workflows to coaching models and business frameworks.</p>
+                                <h3 className='text-xl md:text-2xl text-black font-bold'>Prototype solutions</h3>
+                                <p className='text-md md:text-lg mt-1'>We create agile, scalable systems from AI-powered tools and design workflows to coaching models and business frameworks.</p>
                             </li>
                             <li>
-                                <h3 className='text-black font-bold'>Deploy and refine</h3>
-                                <p>We launch, test, and iterate across real businesses inside our ecosystem—constantly optimizing based on feedback.</p>
+                                <h3 className='text-xl md:text-2xl text-black font-bold'>Deploy and refine</h3>
+                                <p className='text-md md:text-lg mt-1'>We launch, test, and iterate across real businesses inside our ecosystem constantly optimizing based on feedback.</p>
                             </li>
                             <li>
-                                <h3 className='text-black font-bold'>Open source & share</h3>
-                                <p>We publish our insights through WOW WORLD Magazine, ArchYards, and our consulting programs—turning knowledge into tools for the global creative community.</p>
+                                <h3 className='text-xl md:text-2xl text-black font-bold'>Open source & share</h3>
+                                <p className='text-md md:text-lg mt-1'>We publish our insights through WOW WORLD Magazine, ArchYards, and our consulting programs turning knowledge into tools for the global creative community.</p>
                             </li>
                         </ul>
                     </div>
@@ -161,8 +160,8 @@ function page() {
                     {Blocks.map((b, i) => {
                         return (
                             <div key={i} className='w-full leading-8'>
-                                <h3 className='text-black font-bold'>{b.title}</h3>
-                                <p className='pl-6 text-gray-700'>{b.paragraph}</p>
+                                <h3 className='text-xl md:text-2xl text-black font-bold mt-4'>{b.title}</h3>
+                                <p className='text-md md:text-lg text-gray-700 mt-1'>{b.paragraph}</p>
                             </div>
                         )
                     })}
@@ -171,7 +170,7 @@ function page() {
             <section className='w-full h-[90vh] mt-32'>
                 <YellowCard 
                 h1={`Want to Collaborate With Us?`}
-                p={`We partner with creators, studios, and visionary companies who believe the future isn’t something to wait for—it’s something we can design.
+                p={`We partner with creators, studios, and visionary companies who believe the future isn’t something to wait for it’s something we can design.
                 Let’s co-create the tools and systems that will define the next decade.`}
                 link={`Join Our Innovation Network`}
                 img={`https://res.cloudinary.com/dyfregti9/image/upload/v1759591630/R_D_Footer_gdzjtw.png`}

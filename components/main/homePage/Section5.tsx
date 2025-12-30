@@ -18,8 +18,8 @@ function Section5() {
         </h1>
         <h2 className="text-xl sm:text-3xl md:text-5xl font-semibold mt-6 mb-16">
           Invert Hub is where ideas grow into impact. We work across creative
-          niches—from design and architecture to AI publishing, coaching, and
-          innovation—bringing them together under one vision. By blending
+          niches from design and architecture to AI publishing, coaching, and
+          innovation bringing them together under one vision. By blending
           creativity with strategy, technology, and business thinking, we
           deliver solutions that reach beyond the brief and open new
           possibilities.

@@ -24,15 +24,10 @@ const MobileCard = <T extends { id: string, slug?: string  }>({
             {data.map((item) => (
                 <div
                 key={item.id}
-                className="bg-white p-5 rounded-xl shadow-sm border transition-all duration-150 active:scale-[0.98]"
+                className="bg-white p-5 rounded-xl shadow-sm transition-all duration-150 active:scale-[0.98]"
                 >
                     <Link
-                    href={`/dashboard/${page}/
-                    ${
-                    page === "articles"
-                    ? item.slug
-                    : item.id
-                    }/${
+                    href={`/dashboard/${page}/${page === "articles" ? item.slug : item.id}/${
                     page === "users"
                     ? "user-profile"
                     : page === "jobs"

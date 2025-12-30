@@ -62,14 +62,52 @@ const ArticlePage: React.FC<Props> = ({ article }) => {
                   </h1>
                 );
 
+              case "subheader":
+                return (
+                  <h2
+                    key={i}
+                    className="text-2xl font-semibold px-30 leading-relaxed my-6 "
+                  >
+                    {block.data.text}
+                  </h2>
+                );
+
               case "paragraph":
                 return (
                   <p
                     key={i}
-                    className="text-2xl px-30 leading-relaxed my-6 "
+                    className="text-xl px-30 leading-relaxed my-6 "
                   >
                     {block.data.text}
                   </p>
+                );
+
+              case "quote":
+                return (
+                  <blockquote
+                    key={i}
+                    className="border-l-4 border-gray-400 pl-6 italic text-xl text-gray-800 font-serif my-8 leading-relaxed"
+                  >
+                    “{block.data.text}”
+                    {block.data.caption && (
+                      <footer className="mt-2 text-sm text-gray-500 not-italic">
+                        — {block.data.caption}
+                      </footer>
+                    )}
+                  </blockquote>
+                );
+
+              case "link":
+                return (
+                  <a
+                    key={i}
+                    href={block.data.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-600 hover:text-blue-800 underline hover:no-underline font-medium transition-colors duration-200 cursor-pointer block my-4"
+                  >
+                    {block.data.url || "Visit Link"}
+                  </a>
                 );
 
               case "list":

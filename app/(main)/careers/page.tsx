@@ -1,5 +1,6 @@
 "use client";
 
+import Header from "@/components/main/Header";
 import LoadingSpinner from "@/components/states/LoadingSpinner";
 import dynamic from "next/dynamic";
 import Link from "next/link";
@@ -32,14 +33,14 @@ const Team = [
 ];
 function Page() {
   return (
-    <div className="w-full py-30">
-      <section className="w-full px-4 md:px-16">
-        <h1 className="w-full text-4xl md:text-8xl font-extrabold">CAREERS</h1>
-        <p className="text-2xl md:text-4xl font-semibold mt-6">
-          Join us on a journey into the unexpected, where bold thinking meets
+    <div className='w-full py-30 px-6 md:px-16 overflow-x-hidden'>
+      <section className="w-full">
+        <Header 
+        title="CAREERS"
+        paragraph="Join us on a journey into the unexpected, where bold thinking meets
           collective intelligence, and the bigger picture is always within
-          reach.
-        </p>
+          reach."
+        />
         <div className="w-full mt-12 flex justify-end">
           <Link
             href="/jobs"
@@ -54,7 +55,7 @@ function Page() {
           </Link>
         </div>
       </section>
-      <section className="w-full h-full mt-12 px-4 md:px-16">
+      <section className="w-full h-full mt-12">
         <ImageBlock 
         alt="Careers picture"
         src="https://res.cloudinary.com/dyfregti9/image/upload/v1759329723/Carrier-02_nobuix.png"
@@ -63,13 +64,13 @@ function Page() {
       </section>
 
       {/* Articles-2 section */}
-      <section className="px-4 md:px-16 my-40">
+      <section className="my-40">
         <div className="mt-32 mb-24">
-          <h1 className="text-2xl md:text-4xl font-bold ">
+          <h2 className="text-2xl md:text-5xl font-bold ">
             Growing Together, Building the Future
-          </h1>
+          </h2>
           <div className="w-full mt-6">
-            <h3 className="text-md md:text-xl font-semibold">
+            <h3 className="text-md md:text-2xl font-semibold">
               come from tools or systems alone, but from individuals who feel
               supported, inspired, and empowered to push boundaries. That’s why
               we’ve built a culture where growth is not an option, it’s a given.
@@ -92,14 +93,14 @@ function Page() {
         </div>
       </section>
 
-      <section className="w-full h-full mt-8 px-4 md:px-16">
+      <section className="w-full h-full">
         <ImageBlock 
         alt="Careers picture"
         src="https://res.cloudinary.com/dyfregti9/image/upload/v1759593333/Carrier-01_iyur94_pxzisq.webp"
         />
       </section>
 
-      <section className="w-full h-full mt-20 px-4 md:px-16">
+      <section className="w-full h-full mt-20">
         <h1 className="text-2xl md:text-4xl font-bold my-10">From The Team</h1>
         <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-12">
           {Team.map((mem, index) => {

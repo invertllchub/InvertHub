@@ -31,7 +31,6 @@ export async function DELETE(req: NextRequest) {
         console.error("Invalid JSON response:", text);
         result = {};
     }
-    console.log("📦 API response body:", result);
 
     if (!res.ok) {
         return NextResponse.json(

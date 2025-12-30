@@ -8,6 +8,8 @@ import EditorJS from "@editorjs/editorjs";
 import Header from "@editorjs/header";
 import List from "@editorjs/list";
 import ImageTool from "@editorjs/image";
+import LinkTool from "@/utils/editorTools/LinkTool";
+import Quote from "@editorjs/quote";
 // Toast
 import { showToast } from "@/components/toast/Toast";
 // Components
@@ -26,6 +28,8 @@ import IsLoadingState from "@/components/states/IsLoadingState";
 import { toSlug } from "@/utils/ToSlug";
 import { uploadToCloudinary } from "@/utils/CloudinaryUpload";
 import formatDateForInput from "@/utils/FormatDateForInput";
+import SubHeaderTool from "@/utils/editorTools/SubHeaderTool";
+
 
 export default function EditArticlePage() {
   const editorRef = useRef<EditorJS | null>(null);
@@ -93,6 +97,9 @@ export default function EditArticlePage() {
         autofocus: true,
         tools: {
           header: Header,
+          subheader: SubHeaderTool,
+          quote: Quote,
+          link: LinkTool,
           list: List,
           image: {
             class: ImageTool,

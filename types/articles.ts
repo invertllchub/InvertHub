@@ -1,13 +1,18 @@
-/* =========================
-   Editor.js Block Types
-========================= */
+
 
 // Header
 export type HeaderBlock = {
   type: "header";
   data: {
     text: string;
-    level: 1 | 2 | 3 | 4 | 5 | 6;
+  };
+};
+
+// Sub-header
+export type SubHeaderBlock = {
+  type: "subheader";
+  data: {
+    text: string;
   };
 };
 
@@ -33,39 +38,46 @@ export type ImageBlock = {
   };
 };
 
+// Link
+export type LinkBlock = {
+  type: "link";
+  data: {
+    url: string;
+  };
+};
+
 // List
 export type ListBlock = {
   type: "list";
   data: {
     style: "ordered" | "unordered";
     items: Array<string | { text: string }>;
-    meta?: Record<string, any>; // optional إذا موجود
+    meta?: Record<string, any>;   
   };
 };
 
-// Quote (اختياري لكن مفيد)
+// Quote 
 export type QuoteBlock = {
   type: "quote";
   data: {
     text: string;
     caption?: string;
+    alignment?: string;
   };
 };
 
-/* =========================
-   Block Union
-========================= */
 
 export type Block =
   | HeaderBlock
+  | SubHeaderBlock
   | ParagraphBlock
   | ImageBlock
   | ListBlock
-  | QuoteBlock;
+  | QuoteBlock
+  | LinkBlock;
 
-/* =========================
-   Article
-========================= */
+
+
 
 export interface ArticleSEO {
   metaTitle?: string;
@@ -79,7 +91,7 @@ export interface ArticleSEO {
 
 export interface Article {
   id: string;
-  time: number; // Editor.js timestamp
+  time: number; 
   title: string;
   slug: string;
   subTitle?: string;
@@ -100,9 +112,7 @@ export interface Article {
   updatedBy?: string;
 }
 
-/* =========================
-   API Responses
-========================= */
+
 
 export interface ArticlesResponse {
   articles: Article[];

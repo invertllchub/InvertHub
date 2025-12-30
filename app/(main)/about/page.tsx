@@ -1,5 +1,6 @@
 "use client";
 
+import Header from "@/components/main/Header";
 import LoadingSpinner from "@/components/states/LoadingSpinner";
 import dynamic from "next/dynamic";
 import Link from "next/link";
@@ -11,33 +12,18 @@ const ImageBlock = dynamic(() => import('@/components/main/ImageBlock'), {
 })
 export default function AboutPage() {
   return (
-    <div
-      className='w-full py-30 px-4 md:px-16'
-    >
-        {/* Company Section */}
-        <section className='w-full'>
-          <h1 className='w-full text-4xl md:text-8xl font-extrabold'>
-            A Company Built to Scale Creativity
-          </h1>
-          <div className="text-lg md:text-2xl font-semibold text-gray-800 space-y-5 leading-relaxed [&>p]:font-bold [&>p]:tracking-tight mt-10">
-            <p>
-              <span className="font-semibold  text-black">INVERT LLC</span> is a
-              global design and consulting company operating at the intersection
-              of architecture, publishing, and systems innovation.
-            </p>
-            <p>
-              We work with forward-thinking founders, studios, artists, and
-              organizations to turn ideas into structured, scalable realities.
-              From the foundations of physical space to the architecture of
-              digital business models, we support those who create, and those
-              who want to grow.
-            </p>
-            <p>
-              We are based in Berlin and Dubai, with collaborators across
-              Europe, the Middle East, and beyond.
-            </p>
-          </div>
-        </section>
+    <div className='w-full py-30 px-4 md:px-16'>
+      <Header 
+      title="A Company Built to Scale Creativity"
+      paragraph="INVERT LLC is a
+        global design and consulting company operating at the intersection
+        of architecture, publishing, and systems innovation. We work with forward-thinking founders, studios, artists, and
+        organizations to turn ideas into structured, scalable realities.
+        From the foundations of physical space to the architecture of
+        digital business models, we support those who create, and those
+        who want to grow. We are based in Berlin and Dubai, with collaborators across
+        Europe, the Middle East, and beyond."
+      />
 
         <section className='w-full h-full mt-20 '>
           <ImageBlock 
@@ -61,13 +47,13 @@ export default function AboutPage() {
             <br />
             Strategists, and System Builders
           </h1>
-          <div className="space-y-5 text-lg leading-relaxed text-gray-800 [&>p]:font-bold [&>p]:tracking-tight mt-10">
+          <div className="space-y-2 text-2xl leading-relaxed text-black [&>p]:font-bold [&>p]:tracking-tight mt-10">
             <p className="team-paragraph [word-spacing:-0.5px]">
               Our team combines backgrounds in architecture, creative direction,
               business strategy, automation, publishing, and software
               development.
             </p>
-            <p className="team-paragraph font-medium text-black border-l-2 border-black pl-4 py-1 my-6 [word-spacing:-0.5px]">
+            <p className="team-paragraph font-medium text-gray-600 border-l-2 border-black pl-4 py-1 my-6 [word-spacing:-0.5px]">
               We don't believe in departments, we believe in cross-functional
               thinking.
             </p>
@@ -75,11 +61,11 @@ export default function AboutPage() {
               Each project is supported by a curated mix of talent across
               disciplines, handpicked to fit the vision.
             </p>
+            <p className="team-paragraph font-medium text-gray-600 border-l-2 border-black pl-4 py-1 my-6 [word-spacing:-0.5px]">
+              → Meet the people behind WOW WORLD, ArchYards, and From Zero to
+              Hero.
+            </p>
           </div>
-          <p className="meet-team-link mt-8 text-lg font-light border-l-2 border-black pl-4 py-1 transition-all duration-300 cursor-pointer [word-spacing:-0.5px]">
-            → Meet the people behind WOW WORLD, ArchYards, and From Zero to
-            Hero.
-          </p>
         </section>
 
         <section className='w-full h-full mt-20 '>

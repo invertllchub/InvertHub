@@ -16,6 +16,7 @@ import Cookies from "js-cookie";
 import useGetArticle from "@/hooks/articles/useGetArticle";
 import useDeleteArticle from "@/hooks/articles/useDeleteArticle";
 
+
 function ArticleDetailsPage() {
   const defaultCover = "https://res.cloudinary.com/dyfregti9/image/upload/v1764634158/default-ui-image-placeholder-wireframes-600nw-1037719192_hbb5qj.webp";
   const role = Cookies.get("role");
@@ -25,6 +26,7 @@ function ArticleDetailsPage() {
   const {data: article, isLoading, isError} = useGetArticle(articleSlug, {
     enabled: articleSlug !== "",  
   });
+
 
   if (isError) {
     return (
@@ -81,11 +83,12 @@ function ArticleDetailsPage() {
         </div>
 
         {/* -------- Cover -------- */}
-        <div className="relative w-full h-64 md:h-80 rounded-2xl overflow-hidden">
+        <div className="relative w-full aspect-video rounded-2xl overflow-hidden">
           <Image
             src={article?.coverImageUrl || defaultCover}
             alt={article?.title || ""}
             fill
+            unoptimized
             className="object-cover"
           />
         </div>

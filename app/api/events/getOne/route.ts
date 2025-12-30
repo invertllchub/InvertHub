@@ -1,22 +1,30 @@
 import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
 
-
 export async function GET(req: NextRequest) {
-  try {
+    try {
+        const userId = req.nextUrl.searchParams.get("id");
+
+    if (!userId) {
+        return NextResponse.json(
+            { success: false, message: "Job ID is required" },
+            { status: 400 }
+        );
+    }
+
     const cookieStore = await cookies();
     const token = cookieStore.get("token")?.value;
     const url = process.env.BACKEND_URL;
 
-    const res = await fetch(`${url}api/Jobs`, {
+    const res = await fetch(`${url}api/AuditLog/user/${userId}`, {
         method: "GET",
         headers: {
-            "Authorization": `${token}`,
+            Authorization: `${token}`,
         },
     });
 
     const result = await res.json();
-    
+
     if (!res.ok) {
         return NextResponse.json(
             { success: false, message: result.message },

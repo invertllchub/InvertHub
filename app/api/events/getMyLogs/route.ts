@@ -1,22 +1,23 @@
 import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
 
-
 export async function GET(req: NextRequest) {
-  try {
+    try {
+
     const cookieStore = await cookies();
     const token = cookieStore.get("token")?.value;
     const url = process.env.BACKEND_URL;
 
-    const res = await fetch(`${url}api/Jobs`, {
+    const res = await fetch(`${url}api/AuditLog/my-logs`, {
         method: "GET",
         headers: {
-            "Authorization": `${token}`,
+            Authorization: `${token}`,
         },
     });
 
     const result = await res.json();
-    
+
+
     if (!res.ok) {
         return NextResponse.json(
             { success: false, message: result.message },
