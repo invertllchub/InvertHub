@@ -1,4 +1,4 @@
-export function ToSlug(str: string): string {
+export function toSlug(str: string): string {
   return str
     .trim()                   // تشيل المسافات من البداية والنهاية
     .toLowerCase()            // تخلي كله small letters
