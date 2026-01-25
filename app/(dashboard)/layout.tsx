@@ -2,9 +2,7 @@
 import '../(main)/globals.css'
 import dynamic from "next/dynamic";
 // Components
-const NavBar = dynamic(() => import("@/components/dashboard/Navbar"), {
-  loading: () => <p>Loading...</p>, 
-});
+const NavBar = dynamic(() => import("@/components/dashboard/Navbar"));
 
 
 
