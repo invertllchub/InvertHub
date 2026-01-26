@@ -13,8 +13,8 @@ function ProfileCard({user}: userProp) {
     const defaultImage = "https://res.cloudinary.com/dyfregti9/image/upload/v1761832027/INVERT-HUB/zvakmojuzfa5t9ty85r9.jpg"
     return (
 
-        <div className="relative h-full bg-white rounded-3xl shadow-lg flex flex-col  items-center p-6 gap-6">
-          
+        <div className="w-full h-full max-h-full bg-white rounded-3xl shadow-lg flex flex-col p-6 gap-6">
+
             <div className='w-full flex justify-between items-center'>
                 <h2 className="text-xl md:text-2xl font-semibold text-gray-700">User Profile</h2>
                 <Link
