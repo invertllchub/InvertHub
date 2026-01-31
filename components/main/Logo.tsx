@@ -8,7 +8,7 @@ function Logo({ isDark }: { isDark: boolean }) {
     return (
         <div>
             <Link href="/" aria-label="Home">
-                <div className="relative w-[170px] h-[60px]  z-10">
+                <div className="relative w-42.5 h-15 z-10">
                     <Image
                         src={
                             isDark 

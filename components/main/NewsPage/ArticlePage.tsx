@@ -32,22 +32,24 @@ const ArticlePage: React.FC<Props> = ({ article }) => {
 
         {/* Content */}
         <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center px-6 text-white">
-          <h1 className="text-4xl md:text-6xl font-extrabold mb-4 leading-tight max-w-4xl">
+          <h1 className="text-2xl md:text-6xl font-extrabold mb-4 leading-tight max-w-4xl">
             {article.title}
           </h1>
           {article.subTitle && (
-            <p className="text-lg md:text-2xl text-gray-200 mb-6 max-w-3xl">
+            <h2 className="text-md md:text-2xl text-gray-200 mb-6 max-w-3xl">
               {article.subTitle}
-            </p>
+            </h2>
           )}
         </div>
       </div>
 
-      <div className="text-3xl px-10 leading-relaxed my-6 text-center">
-        "{article.seo?.ogDescription}"
+      <div className="text-xl md:text-3xl px-10 leading-relaxed my-6 text-center">
+        <h3>
+          "{article.seo?.ogDescription}"
+        </h3>
       </div>
 
-      <div className="p-6 md:p-16 mt-20">
+      <div className="p-8 md:p-16 mt-20">
         <div className="max-w-6xl mx-auto border-t border-gray-400">
           {blocks.map((block: Block, i: number) => {
             switch (block.type) {
@@ -56,7 +58,7 @@ const ArticlePage: React.FC<Props> = ({ article }) => {
                 return (
                   <h1
                   key={i}
-                  className="text-3xl font-bold px-30 py-4"
+                  className="text-3xl font-bold py-4"
                   >
                     {block.data.text}
                   </h1>
@@ -66,7 +68,7 @@ const ArticlePage: React.FC<Props> = ({ article }) => {
                 return (
                   <h2
                     key={i}
-                    className="text-2xl font-semibold px-30 leading-relaxed my-6 "
+                    className="text-2xl font-semibold leading-relaxed my-6 "
                   >
                     {block.data.text}
                   </h2>
@@ -76,7 +78,7 @@ const ArticlePage: React.FC<Props> = ({ article }) => {
                 return (
                   <p
                     key={i}
-                    className="text-xl px-30 leading-relaxed my-6 "
+                    className="text-xl leading-relaxed my-6 "
                   >
                     {block.data.text}
                   </p>
@@ -114,7 +116,7 @@ const ArticlePage: React.FC<Props> = ({ article }) => {
                 return block.data.style === "ordered" ? (
                   <ol
                     key={i}
-                    className="text-xl list-decimal list-inside px-30 space-y-2 my-6 text-gray-700"
+                    className="text-xl list-decimal list-inside space-y-2 my-6 text-gray-700"
                   >
                     {block.data.items.map((item: any, idx: number) => {
                       const text = typeof item === "string" ? item : item.text || "";
@@ -124,7 +126,7 @@ const ArticlePage: React.FC<Props> = ({ article }) => {
                 ) : (
                   <ul
                     key={i}
-                    className="text-xl list-disc list-inside px-30 space-y-2 my-6 text-gray-700"
+                    className="text-xl list-disc list-inside space-y-2 my-6 text-gray-700"
                   >
                     {block.data.items.map((item: any, idx: number) => {
                       const text = typeof item === "string" ? item : item.content || "";

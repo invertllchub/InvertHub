@@ -31,6 +31,8 @@ function NavBar() {
   ]
   
   useEffect(() => {
+    setIsDark(false);
+
     const darkSections = document.querySelectorAll(".dark-section");
     let ticking = false;
 
